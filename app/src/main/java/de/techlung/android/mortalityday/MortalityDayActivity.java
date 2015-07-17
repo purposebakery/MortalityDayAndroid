@@ -1,38 +1,59 @@
 package de.techlung.android.mortalityday;
 
-import android.support.v7.app.ActionBarActivity;
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuItem;
+import android.support.v4.widget.DrawerLayout;
+import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Toast;
+
+import de.techlung.android.mortalityday.logger.ExceptionLogger;
 
 
-public class MortalityDayActivity extends ActionBarActivity {
+public class MortalityDayActivity  extends AppCompatActivity {
+    public static final String TAG = MortalityDayActivity.class.getName();
+    public static final boolean DEBUG = false;
+
+    private ExceptionLogger logger;
+
+    private DrawerLayout drawerLayout;
+
+    private static MortalityDayActivity instance;
+    public static MortalityDayActivity getInstance() {
+        return instance;
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_mortality_day);
+
+        instance = this;
+
+        initExceptionLogger();
+
+        setContentView(R.layout.main);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
+        initDrawer();
+
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        getMenuInflater().inflate(R.menu.menu_mortality_day, menu);
-        return true;
+    private void initExceptionLogger() {
+        logger = new ExceptionLogger(this);
+        Thread.setDefaultUncaughtExceptionHandler(logger);
+        logger.handlePastExceptions();
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
+    private void initDrawer() {
+        drawerLayout = (DrawerLayout) findViewById(R.id.main);
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
+        drawerLayout.findViewById(R.id.drawer_settings).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(MortalityDayActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
+
+
 }
