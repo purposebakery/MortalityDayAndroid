@@ -2,4 +2,54 @@
     <string name="app_name">MortalityDay</string>
 
     <string name="drawer_settings">Settings</string>
+
+
+    <string name="prefs_title">Settings</string>
+
+    <string name="prefs_day_title">Mortality Day</string>
+    <string name="prefs_day_fequency">Frequency</string>
+    <string name="prefs_day_fequency_key">KEY_FREQENCY</string>
+    <string-array name="prefs_day_fequency_entries">
+        <item>once a week</item>
+        <item>twice a week</item>
+    </string-array>
+    <string-array name="prefs_day_fequency_values">
+        <item>ONCE_A_WEEK</item>
+        <item>TWICE_A_WEEK</item>
+    </string-array>
+
+    <string name="prefs_day_day1">Primary Day</string>
+    <string name="prefs_day_day1_key">KEY_DAY1</string>
+    <string name="prefs_day_day2">Secondary Day</string>
+    <string name="prefs_day_day2_key">KEY_DAY2</string>
+    <string-array name="prefs_day_weekdays_entries">
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+        <item>Saturday</item>
+        <item>Sunday</item>
+    </string-array>
+    <string-array name="prefs_day_weekdays_values">
+        <item>MONDAY</item>
+        <item>TUESDAY</item>
+        <item>WEDNESDAY</item>
+        <item>THURSDAY</item>
+        <item>FRIDAY</item>
+        <item>SATURDAY</item>
+        <item>SUNDAY</item>
+    </string-array>
+
+    <string name="prefs_mortal_title">Mortal</string>
+    <string name="prefs_mortal_name">Name</string>
+    <string name="prefs_mortal_name_default">Anonymous</string>
+    <string name="prefs_mortal_name_key">KEY_USER_NAME</string>
+    <string name="prefs_mortal_user_id">User ID</string>
+    <string name="prefs_mortal_user_id_key">KEY_DEVICE_ID</string>
+
+    <string name="prefs_share_title">Sharing</string>
+    <string name="prefs_share_automatic">Automatic sharing</string>
+    <string name="prefs_share_automatic_key">Automatic sharing</string>
+
 </resources>

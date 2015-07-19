@@ -1,13 +1,19 @@
 package de.techlung.android.mortalityday;
 
+import android.content.ContextWrapper;
+import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.widget.Toast;
+
+import com.pixplicity.easyprefs.library.Prefs;
 
 import de.techlung.android.mortalityday.logger.ExceptionLogger;
+import de.techlung.android.mortalityday.settings.Preferences;
+import de.techlung.android.mortalityday.settings.PreferencesActivity;
+import de.techlung.android.mortalityday.util.DeviceUtil;
 
 
 public class MortalityDayActivity  extends AppCompatActivity {
@@ -30,8 +36,9 @@ public class MortalityDayActivity  extends AppCompatActivity {
         instance = this;
 
         initExceptionLogger();
+        initPreferences();
 
-        setContentView(R.layout.main);
+        setContentView(R.layout.main_activity);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
         initDrawer();
@@ -44,13 +51,26 @@ public class MortalityDayActivity  extends AppCompatActivity {
         logger.handlePastExceptions();
     }
 
+    private void initPreferences() {
+        new Prefs.Builder()
+                .setContext(this)
+                .setMode(ContextWrapper.MODE_PRIVATE)
+                .setPrefsName(getPackageName())
+                .setUseDefaultSharedPreference(true)
+                .build();
+
+        if (Preferences.getDeviceId() == null) {
+            Preferences.setDeviceId(DeviceUtil.getDeviceId(this));
+        }
+    }
+
     private void initDrawer() {
         drawerLayout = (DrawerLayout) findViewById(R.id.main);
 
         drawerLayout.findViewById(R.id.drawer_settings).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(MortalityDayActivity.this, "Settings", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MortalityDayActivity.this, PreferencesActivity.class));
             }
         });
     }
