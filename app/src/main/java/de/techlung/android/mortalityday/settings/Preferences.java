@@ -2,7 +2,7 @@ package de.techlung.android.mortalityday.settings;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
-import de.techlung.android.mortalityday.MortalityDayActivity;
+import de.techlung.android.mortalityday.MainActivity;
 import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.enums.Frequency;
 import de.techlung.android.mortalityday.enums.WeekDay;
@@ -35,7 +35,7 @@ public class Preferences {
     }
 
     public static String getUserName() {
-        return Prefs.getString(USER_NAME, MortalityDayActivity.getInstance().getString(R.string.prefs_mortal_name_default));
+        return Prefs.getString(USER_NAME, "");
     }
 
 

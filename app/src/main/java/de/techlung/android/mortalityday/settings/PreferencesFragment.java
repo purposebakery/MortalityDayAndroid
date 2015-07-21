@@ -1,12 +1,9 @@
 package de.techlung.android.mortalityday.settings;
 
 import android.os.Bundle;
-import android.preference.EditTextPreference;
 import android.preference.ListPreference;
 import android.preference.Preference;
-import android.preference.PreferenceCategory;
 import android.preference.PreferenceFragment;
-import android.preference.PreferenceScreen;
 
 import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.enums.Frequency;
@@ -18,9 +15,6 @@ public class PreferencesFragment extends PreferenceFragment {
     ListPreference day1Preference;
     ListPreference day2Preference;
 
-    EditTextPreference userIdPreference;
-
-
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,9 +25,6 @@ public class PreferencesFragment extends PreferenceFragment {
         frequencyPreference = (ListPreference) findPreference(getString(R.string.prefs_day_fequency_key));
         day1Preference = (ListPreference) findPreference(getString(R.string.prefs_day_day1_key));
         day2Preference = (ListPreference) findPreference(getString(R.string.prefs_day_day2_key));
-
-        userIdPreference = (EditTextPreference) findPreference(getString(R.string.prefs_mortal_user_id_key));
-        userIdPreference.setText(Preferences.getDeviceId());
 
         frequencyPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override

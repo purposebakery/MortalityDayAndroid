@@ -30,29 +30,13 @@
 
     </PreferenceCategory>
 
-
-    <PreferenceCategory
-        android:title="@string/prefs_mortal_title">
-
-        <EditTextPreference
-            android:key="@string/prefs_mortal_name_key"
-            android:title="@string/prefs_mortal_name"
-            android:defaultValue="@string/prefs_mortal_name_default"
-            android:summary="%s"/>
-
-        <EditTextPreference
-            android:key="@string/prefs_mortal_user_id_key"
-            android:title="@string/prefs_mortal_user_id"
-            android:enabled="false"
-            android:summary="%s"/>
-    </PreferenceCategory>
-
     <PreferenceCategory
         android:title="@string/prefs_share_title">
 
         <CheckBoxPreference
             android:key="@string/prefs_share_automatic_key"
-            android:title="@string/prefs_share_automatic"/>
+            android:title="@string/prefs_share_automatic"
+            android:defaultValue="true"/>
     </PreferenceCategory>
 
 </PreferenceScreen>

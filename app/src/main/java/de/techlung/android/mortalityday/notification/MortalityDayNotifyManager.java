@@ -7,6 +7,11 @@ import android.content.Context;
 import android.content.Intent;
 
 import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+
+import de.techlung.android.mortalityday.enums.WeekDay;
+import de.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class MortalityDayNotifyManager {
 
@@ -18,12 +23,19 @@ public class MortalityDayNotifyManager {
     }
 
     private long getNextNotificationTime() {
+        WeekDay weekDay = MortalityDayUtil.getWeekDay();
+        // TODO get time of next Mortality Day!
+
         return Calendar.getInstance().getTimeInMillis();
     }
 
     public class NotifyMortalReceiver extends BroadcastReceiver {
         @Override
         public void onReceive(final Context context, Intent intent) {
+            // TODO check whether we're in a Mortality day now!
+            // / Check if w
+
+
             // do the thing in here
             // including figuring out the next time you want to run
             // and scheduling another PendingIntent with the AlarmManager

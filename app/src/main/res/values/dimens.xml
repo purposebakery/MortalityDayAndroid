@@ -11,4 +11,13 @@
 
     <dimen name="drawer_width">240dp</dimen>
     <dimen name="drawer_item_height">48dp</dimen>
+
+    <dimen name="button_height">48dp</dimen>
+
+
+    <dimen name="header_height">96dp</dimen>
+    <dimen name="header_menu_height">48dp</dimen>
+    <dimen name="header_pagertabs_height">48dp</dimen>
+    <dimen name="header_pagertabs_bar_height">3dp</dimen>
+
 </resources>

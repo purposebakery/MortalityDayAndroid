@@ -2,6 +2,14 @@
     <string name="app_name">MortalityDay</string>
 
     <string name="drawer_settings">Settings</string>
+    <string name="drawer_login">Login</string>
+
+    <string name="login_register">Register</string>
+    <string name="login_login">Login</string>
+    <string name="login_username">Username</string>
+    <string name="login_password">Password</string>
+    <string name="login_field_required">Field required</string>
+    <string name="login_password_incorrect">Password incorrect</string>
 
 
     <string name="prefs_title">Settings</string>
@@ -40,13 +48,6 @@
         <item>SATURDAY</item>
         <item>SUNDAY</item>
     </string-array>
-
-    <string name="prefs_mortal_title">Mortal</string>
-    <string name="prefs_mortal_name">Name</string>
-    <string name="prefs_mortal_name_default">Anonymous</string>
-    <string name="prefs_mortal_name_key">KEY_USER_NAME</string>
-    <string name="prefs_mortal_user_id">User ID</string>
-    <string name="prefs_mortal_user_id_key">KEY_DEVICE_ID</string>
 
     <string name="prefs_share_title">Sharing</string>
     <string name="prefs_share_automatic">Automatic sharing</string>
