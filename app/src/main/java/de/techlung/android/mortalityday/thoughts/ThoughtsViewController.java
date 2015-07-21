@@ -115,6 +115,7 @@ public class ThoughtsViewController {
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
             @Bind(R.id.thoughts_item_text) TextView text;
+            @Bind(R.id.thoughts_item_category) TextView category;
             @Bind(R.id.thoughts_item_cloud_icon) ImageView icon;
             @Bind(R.id.thoughts_item_cloud_icon_container) View iconContainer;
 
@@ -148,6 +149,7 @@ public class ThoughtsViewController {
             final Thought thought = mDataset.get(position);
 
             holder.text.setText(thought.getText());
+            holder.category.setText(activity.getResources().getStringArray(R.array.thoughts_categories)[thought.getCategory()]);
 
             if (thought.getShared()) {
                 holder.icon.setImageResource(R.drawable.ic_action_cloud_done);
