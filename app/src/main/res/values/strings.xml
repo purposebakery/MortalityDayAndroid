@@ -1,5 +1,10 @@
 <resources>
-    <string name="app_name">MortalityDay</string>
+    <string name="app_name">My Mortality Day</string>
+
+    <string name="alert_ok">OK</string>
+    <string name="alert_save">Save</string>
+    <string name="alert_cancel">Cancel</string>
+
 
     <string name="drawer_settings">Settings</string>
     <string name="drawer_login">Login</string>
@@ -11,6 +16,12 @@
     <string name="login_field_required">Field required</string>
     <string name="login_password_incorrect">Password incorrect</string>
 
+    <string name="thoughts">Thought</string>
+    <string name="thoughts_edit_hint">what is your thought?</string>
+    <string-array name="thoughts_categories">
+        <item>Do</item>
+        <item>Don\'t</item>
+    </string-array>
 
     <string name="prefs_title">Settings</string>
 

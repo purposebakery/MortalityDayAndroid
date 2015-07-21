@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingLeft="8dp"
+    android:paddingRight="8dp"
+    android:paddingTop="16dp"
+    android:paddingBottom="16dp"
+    android:background="@color/grey_light">
+
+    <TextView
+        android:id="@+id/thoughts_item_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerVertical="true"
+        android:text="Thought"/>
+
+    <RelativeLayout
+        android:id="@+id/thoughts_item_cloud_icon_container"
+        android:clipChildren="false"
+        android:layout_width="@dimen/icon_large"
+        android:layout_height="@dimen/icon_large"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:background="@drawable/circle_button_background">
+
+        <ImageView
+            android:id="@+id/thoughts_item_cloud_icon"
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:src="@drawable/ic_action_cloud_upload"
+            android:alpha="@dimen/icon_alpha"
+            android:layout_centerInParent="true"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

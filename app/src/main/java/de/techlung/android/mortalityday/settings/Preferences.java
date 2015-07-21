@@ -1,5 +1,6 @@
 package de.techlung.android.mortalityday.settings;
 
+import com.orhanobut.hawk.Hawk;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import de.techlung.android.mortalityday.MainActivity;
@@ -11,8 +12,10 @@ public class Preferences {
     private static final String FREQUENCY = "KEY_FREQENCY";
     private static final String DAY1 = "KEY_DAY1";
     private static final String DAY2 = "KEY_DAY2";
-    private static final String USER_NAME = "KEY_USER_NAME";
     private static final String DEVICE_ID = "KEY_DEVICE_ID";
+
+    private static final String USER_NAME = "USER_NAME";
+    private static final String USER_PASSWORD = "USER_PASSWORD";
 
     public static String getDeviceId() {
         return Prefs.getString(DEVICE_ID, null);
@@ -34,8 +37,20 @@ public class Preferences {
         return WeekDay.valueOf(Prefs.getString(DAY2, WeekDay.THURSDAY.name()));
     }
 
+    public static void setUserName(String userName) {
+        Hawk.put(USER_NAME, userName);
+    }
+
     public static String getUserName() {
-        return Prefs.getString(USER_NAME, "");
+        return Hawk.get(USER_NAME);
+    }
+
+    public static void setUserPassword(String userPassword) {
+        Hawk.put(USER_PASSWORD, userPassword);
+    }
+
+    public static String getUserPassword() {
+        return Hawk.get(USER_PASSWORD);
     }
 
 

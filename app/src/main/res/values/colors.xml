@@ -7,6 +7,8 @@
 
     <color name="text_dark">#222222</color>
 
-    <color name="acent">#d50000</color>
+    <color name="acent">#f44336</color>
+    <color name="acent_light">#e57373</color>
+
 
 </resources>

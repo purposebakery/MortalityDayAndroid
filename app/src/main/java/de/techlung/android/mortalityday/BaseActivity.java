@@ -11,6 +11,9 @@ import com.baasbox.android.BaasHandler;
 import com.baasbox.android.BaasResult;
 import com.baasbox.android.BaasUser;
 import com.baasbox.android.RequestToken;
+import com.orhanobut.hawk.Hawk;
+import com.orhanobut.hawk.HawkBuilder;
+import com.orhanobut.hawk.LogLevel;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import java.util.List;
@@ -20,6 +23,8 @@ import de.techlung.android.mortalityday.logger.ExceptionLogger;
 import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.util.DeviceUtil;
 import de.techlung.android.mortalityday.util.Toaster;
+
+import static com.orhanobut.hawk.HawkBuilder.*;
 
 public class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getName();
@@ -33,6 +38,7 @@ public class BaseActivity extends AppCompatActivity {
 
         initExceptionLogger();
         initPreferences();
+        initSafePreferences();
         initBackend();
     }
 
@@ -60,6 +66,14 @@ public class BaseActivity extends AppCompatActivity {
         if (Preferences.getDeviceId() == null) {
             Preferences.setDeviceId(DeviceUtil.getDeviceId(this));
         }
+    }
+
+    private void initSafePreferences() {
+        Hawk.init(this)
+                .setEncryptionMethod(EncryptionMethod.MEDIUM)
+                .setStorage(newSqliteStorage(this))
+                .setLogLevel(LogLevel.FULL)
+                .build();
     }
 
     private void initBackend() {

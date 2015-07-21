@@ -10,6 +10,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.RelativeLayout;
 
 import com.baasbox.android.BaasDocument;
 import com.baasbox.android.BaasHandler;
@@ -20,6 +21,7 @@ import butterknife.ButterKnife;
 import de.techlung.android.mortalityday.baasbox.Constants;
 import de.techlung.android.mortalityday.gathering.GatheringViewController;
 import de.techlung.android.mortalityday.login.LoginFragment;
+import de.techlung.android.mortalityday.messages.MessageManager;
 import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.settings.PreferencesActivity;
 import de.techlung.android.mortalityday.thoughts.ThoughtsViewController;
@@ -45,6 +47,8 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.drawer_settings) View drawerSettings;
     @Bind(R.id.drawer_login) View drawerLogin;
+
+    @Bind(R.id.message_container) RelativeLayout messageContainer;
 
     ThoughtsViewController thoughtsViewContoller;
     GatheringViewController gatheringViewController;
@@ -72,22 +76,8 @@ public class MainActivity extends BaseActivity {
 
         initDrawer();
         initViewPager();
-        initBackend();
 
-    }
-
-    private void initBackend() {
-
-        BaasDocument document = new BaasDocument(Constants.COLLECTION_DEVICE);
-        document.put(Constants.COLLECTION_DEVICE_ID, Preferences.getDeviceId());
-        document.put(Constants.COLLECTION_DEVICE_NAME, Preferences.getUserName());
-        document.save(new BaasHandler<BaasDocument>() {
-            @Override
-            public void handle(BaasResult<BaasDocument> baasResult) {
-                Log.e(TAG, baasResult.toString());
-                Toaster.show(baasResult.toString());
-            }
-        });
+        initMessage();
     }
 
     private void initDrawer() {
@@ -154,6 +144,10 @@ public class MainActivity extends BaseActivity {
                 pager.setCurrentItem(1);
             }
         });
+    }
+
+    private void initMessage() {
+        MessageManager messageManager = new MessageManager(this, messageContainer);
     }
 
     private class MyAdapter extends PagerAdapter {

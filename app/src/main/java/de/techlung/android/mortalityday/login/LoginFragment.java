@@ -28,16 +28,20 @@ import de.techlung.android.mortalityday.settings.Preferences;
 public class LoginFragment extends DialogFragment {
     public static final String TAG = LoginFragment.class.getName();
 
-    @Bind(R.id.login_login) Button login;
-    @Bind(R.id.login_register) Button register;
-    @Bind(R.id.login_username) EditText username;
-    @Bind(R.id.login_password) EditText password;
+    @Bind(R.id.login_login)
+    Button login;
+    @Bind(R.id.login_register)
+    Button register;
+    @Bind(R.id.login_username)
+    EditText username;
+    @Bind(R.id.login_password)
+    EditText userpassword;
 
     private RequestToken mSignupOrLogin;
     private ProgressDialog progressDialog;
 
     String usernameString;
-    String passwordString;
+    String userpasswordString;
 
     View view;
 
@@ -45,10 +49,11 @@ public class LoginFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.login, container, false);
-        ButterKnife.bind(view);
+        ButterKnife.bind(this, view);
 
-        username.setText(Preferences.getUserName());
-        password.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+        getDialog().setTitle(R.string.login_login);
+
+        userpassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {
                 if (id == EditorInfo.IME_NULL) {
@@ -78,7 +83,7 @@ public class LoginFragment extends DialogFragment {
     @Override
     public void onPause() {
         super.onPause();
-        if (mSignupOrLogin!=null){
+        if (mSignupOrLogin != null) {
             showProgress(false);
             mSignupOrLogin.suspend();
         }
@@ -87,20 +92,24 @@ public class LoginFragment extends DialogFragment {
     @Override
     public void onResume() {
         super.onResume();
-        if (mSignupOrLogin!=null){
+        if (mSignupOrLogin != null) {
             showProgress(true);
             mSignupOrLogin.resume(onComplete);
         }
     }
 
-    private void completeLogin(boolean success){
+    private void completeLogin(boolean success) {
         showProgress(false);
         mSignupOrLogin = null;
         if (success) {
+            // save username and userpassword
+            Preferences.setUserName(usernameString);
+            Preferences.setUserPassword(userpasswordString);
+
             dismiss();
         } else {
-            password.setError(getString(R.string.login_password_incorrect));
-            password.requestFocus();
+            userpassword.setError(getString(R.string.login_password_incorrect));
+            userpassword.requestFocus();
         }
     }
 
@@ -108,23 +117,23 @@ public class LoginFragment extends DialogFragment {
     public void attemptLogin(boolean newUser) {
         // Reset errors.
         username.setError(null);
-        password.setError(null);
+        userpassword.setError(null);
 
         // Store values at the time of the login attempt.
         usernameString = username.getText().toString();
-        passwordString = password.getText().toString();
+        userpasswordString = userpassword.getText().toString();
 
         boolean cancel = false;
         View focusView = null;
 
-        // Check for a valid password.
-        if (TextUtils.isEmpty(passwordString)) {
-            password.setError(getString(R.string.login_field_required));
-            focusView = password;
+        // Check for a valid userpassword.
+        if (TextUtils.isEmpty(userpasswordString)) {
+            userpassword.setError(getString(R.string.login_field_required));
+            focusView = userpassword;
             cancel = true;
-        } else if (passwordString.length() < 4) {
-            password.setError(getString(R.string.login_password_incorrect));
-            focusView = password;
+        } else if (userpasswordString.length() < 4) {
+            userpassword.setError(getString(R.string.login_password_incorrect));
+            focusView = userpassword;
             cancel = true;
         }
 
@@ -147,14 +156,14 @@ public class LoginFragment extends DialogFragment {
         }
     }
 
-    private void signupWithBaasBox(boolean newUser){
+    private void signupWithBaasBox(boolean newUser) {
         //todo 3.1
         BaasUser user = BaasUser.withUserName(usernameString);
-        user.setPassword(passwordString);
+        user.setPassword(userpasswordString);
         if (newUser) {
-            mSignupOrLogin=user.signup(onComplete);
+            mSignupOrLogin = user.signup(onComplete);
         } else {
-            mSignupOrLogin=user.login(onComplete);
+            mSignupOrLogin = user.login(onComplete);
         }
     }
 
@@ -165,7 +174,7 @@ public class LoginFragment extends DialogFragment {
                 public void handle(BaasResult<BaasUser> result) {
 
                     mSignupOrLogin = null;
-                    if (result.isFailed()){
+                    if (result.isFailed()) {
                         Log.d("ERROR", "ERROR", result.error());
                     }
                     completeLogin(result.isSuccess());

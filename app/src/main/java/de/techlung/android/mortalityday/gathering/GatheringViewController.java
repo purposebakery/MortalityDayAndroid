@@ -18,7 +18,7 @@ public class GatheringViewController {
     public GatheringViewController(ViewGroup container) {
         activity = MainActivity.getInstance();
         view = createView(LayoutInflater.from(activity), container);
-        ButterKnife.bind(view);
+        ButterKnife.bind(this, view);
     }
 
     public View getView() {
