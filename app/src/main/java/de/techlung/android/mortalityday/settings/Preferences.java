@@ -17,6 +17,8 @@ public class Preferences {
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_PASSWORD = "USER_PASSWORD";
 
+    private static final String KEY_AUTOMATIC_SHARING = "KEY_AUTOMATIC_SHARING";
+
     public static String getDeviceId() {
         return Prefs.getString(DEVICE_ID, null);
     }
@@ -35,6 +37,17 @@ public class Preferences {
 
     public static WeekDay getDay2() {
         return WeekDay.valueOf(Prefs.getString(DAY2, WeekDay.THURSDAY.name()));
+    }
+
+    public static boolean isAutomaticSharing() {
+        return Prefs.getBoolean(KEY_AUTOMATIC_SHARING, false);
+    }
+
+    public static boolean isAdmin() {
+        if (getUserName() != null && getUserName().equals("Oliver")) {
+            return true;
+        }
+        return false;
     }
 
     public static void setUserName(String userName) {

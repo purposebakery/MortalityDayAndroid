@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.AppCompatSpinner;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -23,15 +22,9 @@ public class EditThoughtDialog {
     @Bind(R.id.thoughts_edit_text) EditText thoughtText;
 
     Thought thought;
-    OnThoughtEditedListener listener;
 
-    public void showEditThoughtDialog(Context context, OnThoughtEditedListener listener) {
-        showEditThoughtDialog(context, listener, null);
-    }
-
-    public void showEditThoughtDialog(Context context, @Nullable OnThoughtEditedListener listener, @Nullable Thought thoughtParam) {
+    public void showEditThoughtDialog(Context context, @Nullable final Thought thoughtParam) {
         this.thought = thoughtParam;
-        this.listener = listener;
 
         initThought();
 
@@ -49,6 +42,7 @@ public class EditThoughtDialog {
             @Override
             public void onClick(DialogInterface dialog, int which) {
                 saveThought();
+                dialog.dismiss();
             }
         });
 
@@ -58,6 +52,16 @@ public class EditThoughtDialog {
                 dialog.dismiss();
             }
         });
+
+        if (thoughtParam != null) {
+            builder.setNeutralButton(R.string.alert_delete, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    DaoFactory.getInstanceLocal().getExtendedThoughtDao().deleteByKey(thoughtParam.getKey());
+                    dialog.dismiss();
+                }
+            });
+        }
 
         builder.show();
     }
@@ -74,16 +78,11 @@ public class EditThoughtDialog {
     }
 
     private void saveThought(){
-        thought.setText(thoughtText.getText().toString());
+        thought.setText(thoughtText.getText().toString().trim());
         thought.setCategory(category.getSelectedItemPosition());
+        thought.setShared(false);
 
-        DaoFactory.getInstance().getExtendedThoughtDao().insertOrReplace(thought);
-        if (listener != null) {
-            listener.onThoughtEdited();
-        }
-    }
-
-    public interface OnThoughtEditedListener {
-        void onThoughtEdited();
+        DaoFactory.getInstanceLocal().getExtendedThoughtDao().insertOrReplace(thought);
+        ThoughtManager.processLocalThoughtsChanged();
     }
 }

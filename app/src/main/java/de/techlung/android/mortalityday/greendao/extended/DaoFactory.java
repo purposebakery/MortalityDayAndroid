@@ -9,6 +9,7 @@ import de.techlung.android.mortalityday.MainActivity;
 import de.techlung.android.mortalityday.files.FileHandler;
 import de.techlung.android.mortalityday.greendao.generated.DaoMaster;
 import de.techlung.android.mortalityday.greendao.generated.ThoughtDao;
+import de.techlung.android.mortalityday.greendao.generated.ThoughtMetaDao;
 import de.techlung.android.mortalityday.greendao.migration.mortalityday.MortalityDayOpenHelper;
 
 public class DaoFactory {
@@ -18,19 +19,18 @@ public class DaoFactory {
     private Context context;
 
     private ExtendedThoughtDao extendedThoughtDao;
+    private ExtendedThoughtMetaDao extendedThoughtMetaDao;
 
-    private static DaoFactory instance;
+    private static DaoFactory instanceLocal;
 
-    // Bewegungsdaten
-    public static DaoFactory getInstance() {
-        if (instance == null) {
-            instance = new DaoFactory();
-            instance.context = MainActivity.getInstance();
-            instance.reinitialiseDb();
+    public static DaoFactory getInstanceLocal() {
+        if (instanceLocal == null) {
+            instanceLocal = new DaoFactory();
+            instanceLocal.context = MainActivity.getInstance();
+            instanceLocal.reinitialiseDb();
         }
-        return instance;
+        return instanceLocal;
     }
-
 
     public void reinitialiseDb() {
         if (db == null) {
@@ -78,6 +78,7 @@ public class DaoFactory {
             daoMaster = null;
 
             extendedThoughtDao = null;
+            extendedThoughtMetaDao = null;
         }
     }
 
@@ -88,6 +89,7 @@ public class DaoFactory {
 
         try {
             getExtendedThoughtDao().deleteAll();
+            getExtendedThoughtMetaDao().deleteAll();
 
             db.setTransactionSuccessful();
         } catch (Exception ex) {
@@ -109,6 +111,14 @@ public class DaoFactory {
             extendedThoughtDao = new ExtendedThoughtDao(thoughtDao);
         }
         return extendedThoughtDao;
+    }
+
+    public ExtendedThoughtMetaDao getExtendedThoughtMetaDao() {
+        if (extendedThoughtMetaDao == null) {
+            ThoughtMetaDao thoughtMetaDao = daoMaster.newSession().getThoughtMetaDao();
+            extendedThoughtMetaDao = new ExtendedThoughtMetaDao(thoughtMetaDao);
+        }
+        return extendedThoughtMetaDao;
     }
 
 }

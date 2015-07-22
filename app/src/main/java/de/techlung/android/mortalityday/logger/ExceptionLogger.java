@@ -13,6 +13,8 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.Scanner;
 
+import de.techlung.android.mortalityday.thoughts.ThoughtManager;
+
 public class ExceptionLogger implements Thread.UncaughtExceptionHandler{
     private static final String EXCEPTION_LOG_NAME = "mortalityday_exception";
 
@@ -24,7 +26,6 @@ public class ExceptionLogger implements Thread.UncaughtExceptionHandler{
 
     @Override
     public void uncaughtException(Thread thread, Throwable ex) {
-
 
         File trgDir = activity.getExternalFilesDir(null);
         if (!trgDir.exists()) {
@@ -63,6 +64,9 @@ public class ExceptionLogger implements Thread.UncaughtExceptionHandler{
 
         final String errorLogMessage = "Error log written to: " + logFile.getAbsolutePath();
         Log.e(ExceptionLogger.class.getName(), errorLogMessage);
+
+        ThoughtManager.clearLocalThoughtsChangedListeners();
+        ThoughtManager.clearSharedThoughtsChangedListeners();
 
         System.exit(0);
     }

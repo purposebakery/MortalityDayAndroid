@@ -4,8 +4,12 @@
     <string name="alert_ok">OK</string>
     <string name="alert_save">Save</string>
     <string name="alert_cancel">Cancel</string>
+    <string name="alert_delete">Delete</string>
 
 
+    <string name="error_no_network">Network Error</string>
+
+    <string name="drawer_restore">Restore Thoughts</string>
     <string name="drawer_settings">Settings</string>
     <string name="drawer_login">Login</string>
 
@@ -62,6 +66,6 @@
 
     <string name="prefs_share_title">Sharing</string>
     <string name="prefs_share_automatic">Automatic sharing</string>
-    <string name="prefs_share_automatic_key">Automatic sharing</string>
+    <string name="prefs_share_automatic_key">KEY_AUTOMATIC_SHARING</string>
 
 </resources>

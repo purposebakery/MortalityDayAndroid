@@ -53,6 +53,8 @@ public class LoginFragment extends DialogFragment {
 
         getDialog().setTitle(R.string.login_login);
 
+        username.setText(Preferences.getUserName());
+
         userpassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView textView, int id, KeyEvent keyEvent) {

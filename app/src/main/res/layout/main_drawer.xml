@@ -65,5 +65,30 @@
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 
+    <View
+        android:id="@+id/separator"
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_below="@+id/drawer_settings"
+        android:background="@color/grey_light"/>
+
+    <LinearLayout
+        android:id="@+id/drawer_restore"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_item_height"
+        android:orientation="horizontal"
+        android:layout_below="@+id/separator"
+        android:background="@drawable/rect_button_background">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_restore"
+            android:layout_marginLeft="18dp"
+            android:textSize="@dimen/text_size_default"
+            android:textColor="@color/text_dark"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
 
 </RelativeLayout>

@@ -6,31 +6,25 @@ import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.baasbox.android.BaasDocument;
-import com.baasbox.android.BaasHandler;
-import com.baasbox.android.BaasResult;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
-import de.techlung.android.mortalityday.baasbox.Constants;
+import de.techlung.android.mortalityday.baasbox.BaasBoxMortalityDay;
 import de.techlung.android.mortalityday.gathering.GatheringViewController;
+import de.techlung.android.mortalityday.greendao.generated.Thought;
 import de.techlung.android.mortalityday.login.LoginFragment;
 import de.techlung.android.mortalityday.messages.MessageManager;
-import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.settings.PreferencesActivity;
+import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 import de.techlung.android.mortalityday.thoughts.ThoughtsViewController;
-import de.techlung.android.mortalityday.util.DeviceUtil;
-import de.techlung.android.mortalityday.util.Toaster;
 import de.techlung.android.mortalityday.util.ToolBox;
 
 
-public class MainActivity extends BaseActivity {
+public class MainActivity extends BaseActivity implements ThoughtManager.LocalThoughtsChangedListener, ThoughtManager.SharedThoughtsChangedListener {
     public static final String TAG = MainActivity.class.getName();
     public static final boolean DEBUG = false;
 
@@ -45,6 +39,7 @@ public class MainActivity extends BaseActivity {
 
     @Bind(R.id.header_menu) View headerMenuButton;
 
+    @Bind(R.id.drawer_restore) View drawerRestore;
     @Bind(R.id.drawer_settings) View drawerSettings;
     @Bind(R.id.drawer_login) View drawerLogin;
 
@@ -52,6 +47,20 @@ public class MainActivity extends BaseActivity {
 
     ThoughtsViewController thoughtsViewContoller;
     GatheringViewController gatheringViewController;
+
+    @Override
+    public void onLocalThoughtsChanged() {
+        if (thoughtsViewContoller != null) {
+            thoughtsViewContoller.reloadAdapter();
+        }
+    }
+
+    @Override
+    public void onSharedThoughtsChanged() {
+        if (gatheringViewController != null) {
+            gatheringViewController.reloadAdapter();
+        }
+    }
 
     public enum State {
         THOUGHTS, GATHERING
@@ -76,8 +85,17 @@ public class MainActivity extends BaseActivity {
 
         initDrawer();
         initViewPager();
-
         initMessage();
+
+        ThoughtManager.addLocalThoughtsChangedListener(this);
+        ThoughtManager.addSharedThoughtsChangedListener(this);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ThoughtManager.removeLocalThoughtsChangedListener(this);
+        ThoughtManager.removeSharedThoughtsChangedListener(this);
     }
 
     private void initDrawer() {
@@ -105,6 +123,12 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 getSupportFragmentManager().beginTransaction().add(new LoginFragment(), LoginFragment.TAG).commit();
+            }
+        });
+        drawerRestore.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                BaasBoxMortalityDay.restoreThoughts();
             }
         });
     }
@@ -142,6 +166,9 @@ public class MainActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 pager.setCurrentItem(1);
+                if (gatheringViewController != null) {
+                    gatheringViewController.reloadData();
+                }
             }
         });
     }

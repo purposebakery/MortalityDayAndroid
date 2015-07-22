@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/thoughts_item_root"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -9,25 +10,6 @@
     android:paddingBottom="16dp"
     android:background="@color/grey_light">
 
-
-    <TextView
-        android:id="@+id/thoughts_item_category"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:textStyle="bold"
-        android:text="Category"/>
-
-    <TextView
-        android:id="@+id/thoughts_item_text"
-        android:layout_toRightOf="@+id/thoughts_item_category"
-        android:layout_marginLeft="16dp"
-        android:layout_marginRight="8dp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/thoughts_item_cloud_icon_container"
-        android:text="Thought Thought ThoughtThought Thought Thought Thought Thought Thought"/>
 
     <RelativeLayout
         android:id="@+id/thoughts_item_cloud_icon_container"
@@ -47,6 +29,15 @@
             android:layout_centerInParent="true"/>
 
     </RelativeLayout>
+
+
+    <include
+        android:id="@+id/thoughts_info"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@+id/thoughts_item_cloud_icon_container"
+        android:layout_centerVertical="true"
+        layout="@layout/thoughts_generic"/>
 
 
 </RelativeLayout>

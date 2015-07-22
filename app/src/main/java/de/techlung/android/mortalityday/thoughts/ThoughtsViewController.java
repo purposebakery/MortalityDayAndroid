@@ -2,6 +2,7 @@ package de.techlung.android.mortalityday.thoughts;
 
 
 import android.app.Activity;
+import android.support.annotation.Nullable;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -23,6 +24,7 @@ import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.baasbox.BaasBoxMortalityDay;
 import de.techlung.android.mortalityday.greendao.extended.DaoFactory;
 import de.techlung.android.mortalityday.greendao.generated.Thought;
+import de.techlung.android.mortalityday.settings.Preferences;
 
 public class ThoughtsViewController {
     public static final String TAG = ThoughtsViewController.class.getName();
@@ -61,7 +63,7 @@ public class ThoughtsViewController {
 
     private void initData() {
         thoughts.clear();
-        thoughts.addAll(DaoFactory.getInstance().getExtendedThoughtDao().getAllThoughts());
+        thoughts.addAll(DaoFactory.getInstanceLocal().getExtendedThoughtDao().getAllThoughts());
     }
 
     private void initList() {
@@ -90,20 +92,18 @@ public class ThoughtsViewController {
                 YoYo.with(Techniques.TakingOff).duration(200).playOn(addButton);
                 YoYo.with(Techniques.Landing).duration(200).delay(200).playOn(addButton);
 
-                (new EditThoughtDialog()).showEditThoughtDialog(activity, new EditThoughtDialog.OnThoughtEditedListener() {
-                    @Override
-                    public void onThoughtEdited() {
-                        reloadAdapter();
-                    }
-                });
+                showEditThoughtDialog(null);
             }
         });
     }
 
-    private void reloadAdapter() {
+    private void showEditThoughtDialog(@Nullable Thought thought) {
+        (new EditThoughtDialog()).showEditThoughtDialog(activity, thought);
+    }
+
+    public void reloadAdapter() {
         initData();
         recyclerAdapter.notifyDataSetChanged();
-
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -114,10 +114,11 @@ public class ThoughtsViewController {
         // you provide access to all the views for a data item in a view holder
         public class ViewHolder extends RecyclerView.ViewHolder {
             // each data item is just a string in this case
-            @Bind(R.id.thoughts_item_text) TextView text;
-            @Bind(R.id.thoughts_item_category) TextView category;
+            @Bind(R.id.thoughts_text) TextView text;
+            @Bind(R.id.thoughts_category) TextView category;
             @Bind(R.id.thoughts_item_cloud_icon) ImageView icon;
             @Bind(R.id.thoughts_item_cloud_icon_container) View iconContainer;
+            @Bind(R.id.thoughts_item_root) View root;
 
             public ViewHolder(View v) {
                 super(v);
@@ -154,20 +155,26 @@ public class ThoughtsViewController {
             if (thought.getShared()) {
                 holder.icon.setImageResource(R.drawable.ic_action_cloud_done);
             } else {
-                holder.icon.setImageResource(R.drawable.ic_action_cloud_upload);
+                if (Preferences.isAutomaticSharing()) {
+                    holder.icon.setImageResource(R.drawable.ic_action_cached);
+                } else {
+                    holder.icon.setImageResource(R.drawable.ic_action_cloud_upload);
+                }
             }
 
             holder.iconContainer.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    if (!thought.getShared()) {
-                        BaasBoxMortalityDay.sendThought(thought, new BaasBoxMortalityDay.OnBassResultListener() {
-                            @Override
-                            public void onBaasResult(boolean success) {
-                                reloadAdapter();
-                            }
-                        });
+                    if (!thought.getShared() && !Preferences.isAutomaticSharing()) {
+                        BaasBoxMortalityDay.sendThought(thought);
                     }
+                }
+            });
+
+            holder.root.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    showEditThoughtDialog(thought);
                 }
             });
 

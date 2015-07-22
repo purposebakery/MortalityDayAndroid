@@ -14,7 +14,7 @@ import de.techlung.android.mortalityday.greendao.generated.Thought;
 /** 
  * DAO for table THOUGHT.
 */
-public class ThoughtDao extends AbstractDao<Thought, Void> {
+public class ThoughtDao extends AbstractDao<Thought, String> {
 
     public static final String TABLENAME = "THOUGHT";
 
@@ -23,12 +23,11 @@ public class ThoughtDao extends AbstractDao<Thought, Void> {
      * Can be used for QueryBuilder and for referencing column names.
     */
     public static class Properties {
-        public final static Property _id = new Property(0, Long.class, "_id", false, "_ID");
-        public final static Property Key = new Property(1, String.class, "key", false, "KEY");
-        public final static Property Category = new Property(2, Integer.class, "category", false, "CATEGORY");
-        public final static Property Text = new Property(3, String.class, "text", false, "TEXT");
-        public final static Property Rating = new Property(4, Integer.class, "rating", false, "RATING");
-        public final static Property Shared = new Property(5, Boolean.class, "shared", false, "SHARED");
+        public final static Property Key = new Property(0, String.class, "key", true, "KEY");
+        public final static Property Category = new Property(1, Integer.class, "category", false, "CATEGORY");
+        public final static Property Text = new Property(2, String.class, "text", false, "TEXT");
+        public final static Property Rating = new Property(3, Integer.class, "rating", false, "RATING");
+        public final static Property Shared = new Property(4, Boolean.class, "shared", false, "SHARED");
     };
 
 
@@ -44,12 +43,11 @@ public class ThoughtDao extends AbstractDao<Thought, Void> {
     public static void createTable(SQLiteDatabase db, boolean ifNotExists) {
         String constraint = ifNotExists? "IF NOT EXISTS ": "";
         db.execSQL("CREATE TABLE " + constraint + "'THOUGHT' (" + //
-                "'_ID' INTEGER UNIQUE ," + // 0: _id
-                "'KEY' TEXT UNIQUE ," + // 1: key
-                "'CATEGORY' INTEGER," + // 2: category
-                "'TEXT' TEXT," + // 3: text
-                "'RATING' INTEGER," + // 4: rating
-                "'SHARED' INTEGER);"); // 5: shared
+                "'KEY' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: key
+                "'CATEGORY' INTEGER," + // 1: category
+                "'TEXT' TEXT," + // 2: text
+                "'RATING' INTEGER," + // 3: rating
+                "'SHARED' INTEGER);"); // 4: shared
     }
 
     /** Drops the underlying database table. */
@@ -63,53 +61,47 @@ public class ThoughtDao extends AbstractDao<Thought, Void> {
     protected void bindValues(SQLiteStatement stmt, Thought entity) {
         stmt.clearBindings();
  
-        Long _id = entity.get_id();
-        if (_id != null) {
-            stmt.bindLong(1, _id);
-        }
- 
         String key = entity.getKey();
         if (key != null) {
-            stmt.bindString(2, key);
+            stmt.bindString(1, key);
         }
  
         Integer category = entity.getCategory();
         if (category != null) {
-            stmt.bindLong(3, category);
+            stmt.bindLong(2, category);
         }
  
         String text = entity.getText();
         if (text != null) {
-            stmt.bindString(4, text);
+            stmt.bindString(3, text);
         }
  
         Integer rating = entity.getRating();
         if (rating != null) {
-            stmt.bindLong(5, rating);
+            stmt.bindLong(4, rating);
         }
  
         Boolean shared = entity.getShared();
         if (shared != null) {
-            stmt.bindLong(6, shared ? 1l: 0l);
+            stmt.bindLong(5, shared ? 1l: 0l);
         }
     }
 
     /** @inheritdoc */
     @Override
-    public Void readKey(Cursor cursor, int offset) {
-        return null;
+    public String readKey(Cursor cursor, int offset) {
+        return cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0);
     }    
 
     /** @inheritdoc */
     @Override
     public Thought readEntity(Cursor cursor, int offset) {
         Thought entity = new Thought( //
-            cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0), // _id
-            cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1), // key
-            cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2), // category
-            cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3), // text
-            cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4), // rating
-            cursor.isNull(offset + 5) ? null : cursor.getShort(offset + 5) != 0 // shared
+            cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // key
+            cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // category
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // text
+            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // rating
+            cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0 // shared
         );
         return entity;
     }
@@ -117,25 +109,27 @@ public class ThoughtDao extends AbstractDao<Thought, Void> {
     /** @inheritdoc */
     @Override
     public void readEntity(Cursor cursor, Thought entity, int offset) {
-        entity.set_id(cursor.isNull(offset + 0) ? null : cursor.getLong(offset + 0));
-        entity.setKey(cursor.isNull(offset + 1) ? null : cursor.getString(offset + 1));
-        entity.setCategory(cursor.isNull(offset + 2) ? null : cursor.getInt(offset + 2));
-        entity.setText(cursor.isNull(offset + 3) ? null : cursor.getString(offset + 3));
-        entity.setRating(cursor.isNull(offset + 4) ? null : cursor.getInt(offset + 4));
-        entity.setShared(cursor.isNull(offset + 5) ? null : cursor.getShort(offset + 5) != 0);
+        entity.setKey(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
+        entity.setCategory(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
+        entity.setText(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setRating(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
+        entity.setShared(cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0);
      }
     
     /** @inheritdoc */
     @Override
-    protected Void updateKeyAfterInsert(Thought entity, long rowId) {
-        // Unsupported or missing PK type
-        return null;
+    protected String updateKeyAfterInsert(Thought entity, long rowId) {
+        return entity.getKey();
     }
     
     /** @inheritdoc */
     @Override
-    public Void getKey(Thought entity) {
-        return null;
+    public String getKey(Thought entity) {
+        if(entity != null) {
+            return entity.getKey();
+        } else {
+            return null;
+        }
     }
 
     /** @inheritdoc */

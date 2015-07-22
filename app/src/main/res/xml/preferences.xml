@@ -36,7 +36,7 @@
         <CheckBoxPreference
             android:key="@string/prefs_share_automatic_key"
             android:title="@string/prefs_share_automatic"
-            android:defaultValue="true"/>
+            android:defaultValue="false"/>
     </PreferenceCategory>
 
 </PreferenceScreen>
