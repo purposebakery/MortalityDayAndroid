@@ -54,6 +54,7 @@ public class LoginFragment extends DialogFragment {
         getDialog().setTitle(R.string.login_login);
 
         username.setText(Preferences.getUserName());
+        userpassword.setText(Preferences.getUserPassword());
 
         userpassword.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -187,6 +188,7 @@ public class LoginFragment extends DialogFragment {
         if (show) {
             if (progressDialog == null) {
                 progressDialog = new ProgressDialog(getActivity());
+                progressDialog.setMessage(getActivity().getString(R.string.alert_loading));
             }
             progressDialog.show();
         } else {

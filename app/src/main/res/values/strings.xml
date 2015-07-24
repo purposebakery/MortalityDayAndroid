@@ -5,6 +5,9 @@
     <string name="alert_save">Save</string>
     <string name="alert_cancel">Cancel</string>
     <string name="alert_delete">Delete</string>
+    <string name="alert_thanks">Thanks</string>
+
+    <string name="alert_loading">Loading...</string>
 
 
     <string name="error_no_network">Network Error</string>
@@ -20,6 +23,12 @@
     <string name="login_field_required">Field required</string>
     <string name="login_password_incorrect">Password incorrect</string>
 
+    <string name="first_start_title">Welcome</string>
+    <string name="first_start_message">One day you will die. \n\nWhy should you reflect on this fact? Simple. It will serve as the foundation of discovering your personal meaning in life. \n\nWelcome to a community of aware mortals :)</string>
+
+    <string name="cloud_error_title">Cloud Error</string>
+    <string name="cloud_error_message">Please register and login to use cloud functions.</string>
+
     <string name="thoughts">Thought</string>
     <string name="thoughts_edit_hint">what is your thought?</string>
     <string-array name="thoughts_categories">
@@ -27,45 +36,12 @@
         <item>Don\'t</item>
     </string-array>
 
-    <string name="prefs_title">Settings</string>
-
-    <string name="prefs_day_title">Mortality Day</string>
-    <string name="prefs_day_fequency">Frequency</string>
-    <string name="prefs_day_fequency_key">KEY_FREQENCY</string>
-    <string-array name="prefs_day_fequency_entries">
-        <item>once a week</item>
-        <item>twice a week</item>
-    </string-array>
-    <string-array name="prefs_day_fequency_values">
-        <item>ONCE_A_WEEK</item>
-        <item>TWICE_A_WEEK</item>
+    <string name="notification_title">My Mortality Day</string>
+    <string-array name="notification_messages">
+        <item>Remind me that I must die, so I grow wise.</item>
+        <item>Don\'t regret growing older. Its a privilege denied to many.</item>
     </string-array>
 
-    <string name="prefs_day_day1">Primary Day</string>
-    <string name="prefs_day_day1_key">KEY_DAY1</string>
-    <string name="prefs_day_day2">Secondary Day</string>
-    <string name="prefs_day_day2_key">KEY_DAY2</string>
-    <string-array name="prefs_day_weekdays_entries">
-        <item>Monday</item>
-        <item>Tuesday</item>
-        <item>Wednesday</item>
-        <item>Thursday</item>
-        <item>Friday</item>
-        <item>Saturday</item>
-        <item>Sunday</item>
-    </string-array>
-    <string-array name="prefs_day_weekdays_values">
-        <item>MONDAY</item>
-        <item>TUESDAY</item>
-        <item>WEDNESDAY</item>
-        <item>THURSDAY</item>
-        <item>FRIDAY</item>
-        <item>SATURDAY</item>
-        <item>SUNDAY</item>
-    </string-array>
 
-    <string name="prefs_share_title">Sharing</string>
-    <string name="prefs_share_automatic">Automatic sharing</string>
-    <string name="prefs_share_automatic_key">KEY_AUTOMATIC_SHARING</string>
 
 </resources>

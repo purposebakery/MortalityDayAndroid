@@ -6,7 +6,6 @@ import android.database.sqlite.SQLiteDatabase;
 import java.io.File;
 
 import de.techlung.android.mortalityday.MainActivity;
-import de.techlung.android.mortalityday.files.FileHandler;
 import de.techlung.android.mortalityday.greendao.generated.DaoMaster;
 import de.techlung.android.mortalityday.greendao.generated.ThoughtDao;
 import de.techlung.android.mortalityday.greendao.generated.ThoughtMetaDao;

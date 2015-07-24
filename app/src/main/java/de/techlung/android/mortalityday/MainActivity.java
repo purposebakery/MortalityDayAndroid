@@ -11,13 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.techlung.android.mortalityday.baasbox.BaasBoxMortalityDay;
 import de.techlung.android.mortalityday.gathering.GatheringViewController;
-import de.techlung.android.mortalityday.greendao.generated.Thought;
 import de.techlung.android.mortalityday.login.LoginFragment;
 import de.techlung.android.mortalityday.messages.MessageManager;
+import de.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
+import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.settings.PreferencesActivity;
 import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 import de.techlung.android.mortalityday.thoughts.ThoughtsViewController;
@@ -38,6 +42,7 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
     @Bind(R.id.header_pagertabs_bar) View pagerTabBar;
 
     @Bind(R.id.header_menu) View headerMenuButton;
+    @Bind(R.id.header_more) View headerMoreButton;
 
     @Bind(R.id.drawer_restore) View drawerRestore;
     @Bind(R.id.drawer_settings) View drawerSettings;
@@ -81,14 +86,30 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
         setContentView(R.layout.main_activity);
         setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
 
+        checkFirstStart();
+
         ButterKnife.bind(this);
 
+        initMenu();
         initDrawer();
         initViewPager();
         initMessage();
 
         ThoughtManager.addLocalThoughtsChangedListener(this);
         ThoughtManager.addSharedThoughtsChangedListener(this);
+    }
+
+    private void checkFirstStart() {
+        if (Preferences.getFirstStart()) {
+            startActivity(new Intent(this, PreferencesActivity.class));
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+
+        MortalityDayNotificationManager.setNextNotification(this);
     }
 
     @Override
@@ -98,18 +119,28 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
         ThoughtManager.removeSharedThoughtsChangedListener(this);
     }
 
+    private void initMenu() {
+        headerMenuButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                drawerLayout.openDrawer(Gravity.LEFT);
+            }
+        });
+
+        headerMoreButton.setVisibility(View.GONE);
+        headerMoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // TODO open more menü to sort Data 
+            }
+        });
+    }
+
     private void initDrawer() {
         drawerLayout.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 startActivity(new Intent(MainActivity.this, PreferencesActivity.class));
-            }
-        });
-
-        headerMenuButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                drawerLayout.openDrawer(Gravity.LEFT);
             }
         });
 
@@ -216,8 +247,11 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
         animateTabBarToState(state);
 
         if (state == State.THOUGHTS) {
+            YoYo.with(Techniques.RotateOut).duration(TRANSITION_SPEED).playOn(headerMoreButton);
             // push load data
         } else {
+            headerMoreButton.setVisibility(View.VISIBLE);
+            YoYo.with(Techniques.RotateIn).duration(TRANSITION_SPEED).playOn(headerMoreButton);
             // push load data
         }
     }

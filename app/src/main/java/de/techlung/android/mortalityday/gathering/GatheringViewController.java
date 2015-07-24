@@ -27,6 +27,7 @@ import de.techlung.android.mortalityday.greendao.generated.Thought;
 import de.techlung.android.mortalityday.greendao.generated.ThoughtDao;
 import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.thoughts.ThoughtManager;
+import de.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class GatheringViewController {
     public static final String TAG = GatheringViewController.class.getName();
@@ -58,8 +59,6 @@ public class GatheringViewController {
         initData();
         initList();
 
-        reloadData();
-
         return view;
     }
 
@@ -69,7 +68,7 @@ public class GatheringViewController {
         Collections.sort(thoughts, new Comparator<BaasDocument>() {
             @Override
             public int compare(BaasDocument lhs, BaasDocument rhs) {
-                return lhs.getInt(ThoughtDao.Properties.Rating.name) - rhs.getInt(ThoughtDao.Properties.Rating.name);
+                return rhs.getInt(ThoughtDao.Properties.Rating.name) - lhs.getInt(ThoughtDao.Properties.Rating.name);
             }
         });
     }
@@ -112,6 +111,8 @@ public class GatheringViewController {
             // each data item is just a string in this case
             @Bind(R.id.thoughts_text) TextView text;
             @Bind(R.id.thoughts_category) TextView category;
+            @Bind(R.id.thoughts_author) TextView author;
+            @Bind(R.id.thoughts_date) TextView date;
 
             @Bind(R.id.gathering_item_rating) TextView rating;
             @Bind(R.id.gathering_item_root) View root;
@@ -151,6 +152,8 @@ public class GatheringViewController {
             holder.text.setText(thought.getString(ThoughtDao.Properties.Text.name));
             holder.category.setText(activity.getResources().getStringArray(R.array.thoughts_categories)[thought.getInt(ThoughtDao.Properties.Category.name)]);
             holder.rating.setText("" + thought.getInt(ThoughtDao.Properties.Rating.name));
+            holder.author.setText(thought.getString(ThoughtDao.Properties.Author.name));
+            holder.date.setText(MortalityDayUtil.getDateFormatted(thought.getLong(ThoughtDao.Properties.Date.name)));
 
             if (DaoFactory.getInstanceLocal().getExtendedThoughtMetaDao().getThoughtMeta(thought.getString(ThoughtDao.Properties.Key.name)) != null){
                 holder.voteUp.setVisibility(View.INVISIBLE);

@@ -25,6 +25,7 @@ import de.techlung.android.mortalityday.baasbox.BaasBoxMortalityDay;
 import de.techlung.android.mortalityday.greendao.extended.DaoFactory;
 import de.techlung.android.mortalityday.greendao.generated.Thought;
 import de.techlung.android.mortalityday.settings.Preferences;
+import de.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class ThoughtsViewController {
     public static final String TAG = ThoughtsViewController.class.getName();
@@ -116,6 +117,9 @@ public class ThoughtsViewController {
             // each data item is just a string in this case
             @Bind(R.id.thoughts_text) TextView text;
             @Bind(R.id.thoughts_category) TextView category;
+            @Bind(R.id.thoughts_author) TextView author;
+            @Bind(R.id.thoughts_date) TextView date;
+
             @Bind(R.id.thoughts_item_cloud_icon) ImageView icon;
             @Bind(R.id.thoughts_item_cloud_icon_container) View iconContainer;
             @Bind(R.id.thoughts_item_root) View root;
@@ -151,6 +155,9 @@ public class ThoughtsViewController {
 
             holder.text.setText(thought.getText());
             holder.category.setText(activity.getResources().getStringArray(R.array.thoughts_categories)[thought.getCategory()]);
+            holder.author.setVisibility(View.GONE);
+            holder.date.setText(MortalityDayUtil.getDateFormatted(thought.getDate().getTime()));
+
 
             if (thought.getShared()) {
                 holder.icon.setImageResource(R.drawable.ic_action_cloud_done);

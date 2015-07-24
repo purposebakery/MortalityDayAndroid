@@ -9,11 +9,14 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Spinner;
 
+import java.util.Date;
+
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.greendao.extended.DaoFactory;
 import de.techlung.android.mortalityday.greendao.generated.Thought;
+import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.util.ThoughtUtil;
 
 public class EditThoughtDialog {
@@ -73,6 +76,7 @@ public class EditThoughtDialog {
             thought.setCategory(Integer.valueOf(0));
             thought.setRating(0);
             thought.setShared(false);
+            thought.setDate(new Date());
             thought.setText("");
         }
     }
@@ -80,6 +84,7 @@ public class EditThoughtDialog {
     private void saveThought(){
         thought.setText(thoughtText.getText().toString().trim());
         thought.setCategory(category.getSelectedItemPosition());
+        thought.setAuthor(Preferences.getUserName());
         thought.setShared(false);
 
         DaoFactory.getInstanceLocal().getExtendedThoughtDao().insertOrReplace(thought);

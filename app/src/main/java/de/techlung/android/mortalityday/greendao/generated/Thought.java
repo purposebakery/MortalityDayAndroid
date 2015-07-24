@@ -4,7 +4,11 @@ package de.techlung.android.mortalityday.greendao.generated;
 
 // KEEP INCLUDES - put your custom includes here
 import com.baasbox.android.BaasDocument;
+
+import java.util.Date;
+
 import de.techlung.android.mortalityday.baasbox.Constants;
+import de.techlung.android.mortalityday.settings.Preferences;
 // KEEP INCLUDES END
 /**
  * Entity mapped to table THOUGHT.
@@ -13,6 +17,8 @@ public class Thought {
 
     private String key;
     private Integer category;
+    private String author;
+    private java.util.Date date;
     private String text;
     private Integer rating;
     private Boolean shared;
@@ -27,9 +33,11 @@ public class Thought {
         this.key = key;
     }
 
-    public Thought(String key, Integer category, String text, Integer rating, Boolean shared) {
+    public Thought(String key, Integer category, String author, java.util.Date date, String text, Integer rating, Boolean shared) {
         this.key = key;
         this.category = category;
+        this.author = author;
+        this.date = date;
         this.text = text;
         this.rating = rating;
         this.shared = shared;
@@ -49,6 +57,22 @@ public class Thought {
 
     public void setCategory(Integer category) {
         this.category = category;
+    }
+
+    public String getAuthor() {
+        return author;
+    }
+
+    public void setAuthor(String author) {
+        this.author = author;
+    }
+
+    public java.util.Date getDate() {
+        return date;
+    }
+
+    public void setDate(java.util.Date date) {
+        this.date = date;
     }
 
     public String getText() {
@@ -82,7 +106,9 @@ public class Thought {
         document.put(ThoughtDao.Properties.Key.name, getKey());
         document.put(ThoughtDao.Properties.Category.name, getCategory());
         document.put(ThoughtDao.Properties.Text.name, getText());
+        document.put(ThoughtDao.Properties.Author.name, Preferences.getUserName());
         document.put(ThoughtDao.Properties.Rating.name, getRating());
+        document.put(ThoughtDao.Properties.Date.name, getDate().getTime());
 
         return document;
     }
@@ -91,6 +117,8 @@ public class Thought {
         setKey(document.getString(ThoughtDao.Properties.Key.name));
         setCategory(document.getInt(ThoughtDao.Properties.Category.name));
         setText(document.getString(ThoughtDao.Properties.Text.name));
+        setDate(new Date(document.getLong(ThoughtDao.Properties.Date.name)));
+        setAuthor(document.getString(ThoughtDao.Properties.Author.name));
         setRating(document.getInt(ThoughtDao.Properties.Rating.name));
     }
 

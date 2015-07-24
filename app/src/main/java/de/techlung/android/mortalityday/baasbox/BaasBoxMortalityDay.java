@@ -1,16 +1,22 @@
 package de.techlung.android.mortalityday.baasbox;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.util.Log;
 
+import com.baasbox.android.BaasBox;
 import com.baasbox.android.BaasDocument;
 import com.baasbox.android.BaasException;
 import com.baasbox.android.BaasHandler;
 import com.baasbox.android.BaasResult;
+import com.baasbox.android.BaasUser;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.techlung.android.mortalityday.BaseActivity;
+import de.techlung.android.mortalityday.MainActivity;
+import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.greendao.extended.DaoFactory;
 import de.techlung.android.mortalityday.greendao.extended.ExtendedThoughtDao;
 import de.techlung.android.mortalityday.greendao.generated.Thought;
@@ -24,12 +30,14 @@ public class BaasBoxMortalityDay {
     private static final String TAG = BaasBoxMortalityDay.class.getName();
 
     private static List<String> sendingThoughtKeys = new ArrayList<String>();
-    private static List<String> deletingThoughtKeys = new ArrayList<String>();
+    //private static List<String> deletingThoughtKeys = new ArrayList<String>();
 
     private static int VOTE_UP = 1;
     private static int VOTE_DOWN = -1;
 
     public static void getAllThoughts() {
+        checkUserAuthenticatedAndDisplayErrorMessage();
+
         BaasDocument.fetchAll(Constants.COLLECTION_THOUGHTS, new BaasHandler<List<BaasDocument>>() {
             @Override
             public void handle(BaasResult<List<BaasDocument>> baasResult) {
@@ -52,6 +60,8 @@ public class BaasBoxMortalityDay {
     }
 
     public static void sendThought(final Thought thought) {
+        checkUserAuthenticatedAndDisplayErrorMessage();
+
         if (sendingThoughtKeys.contains(thought.getKey())) {
             return;
         }
@@ -77,6 +87,8 @@ public class BaasBoxMortalityDay {
     }
 
     public static void deleteThought(final BaasDocument thought) {
+        checkUserAuthenticatedAndDisplayErrorMessage();
+
         thought.delete(new BaasHandler<Void>() {
             @Override
             public void handle(BaasResult<Void> baasResult) {
@@ -91,6 +103,8 @@ public class BaasBoxMortalityDay {
     }
 
     public static void restoreThoughts() {
+        checkUserAuthenticatedAndDisplayErrorMessage();
+
         BaasDocument.fetchAll(Constants.COLLECTION_THOUGHTS,
                 new BaasHandler<List<BaasDocument>>() {
                     @Override
@@ -132,6 +146,8 @@ public class BaasBoxMortalityDay {
     }
 
     private static void voteThought(BaasDocument thought, final int vote) {
+        checkUserAuthenticatedAndDisplayErrorMessage();
+
         thought.refresh(new BaasHandler<BaasDocument>() {
             @Override
             public void handle(BaasResult<BaasDocument> baasResult) {
@@ -172,5 +188,24 @@ public class BaasBoxMortalityDay {
                 }
             }
         });
+    }
+
+    private static void checkUserAuthenticatedAndDisplayErrorMessage() {
+        if (!BaasUser.isAuthentcated()) {
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.getInstance());
+
+            builder.setTitle(R.string.cloud_error_title);
+            builder.setMessage(R.string.cloud_error_message);
+
+            builder.setPositiveButton(R.string.alert_ok, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+
+            builder.show();
+
+        }
     }
 }

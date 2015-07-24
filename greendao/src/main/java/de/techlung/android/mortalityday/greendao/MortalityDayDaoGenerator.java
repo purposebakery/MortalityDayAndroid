@@ -53,6 +53,8 @@ public class MortalityDayDaoGenerator {
 
         thought.addStringProperty("key").unique().primaryKey();
         thought.addIntProperty("category");
+        thought.addStringProperty("author");
+        thought.addDateProperty("date");
         thought.addStringProperty("text");
         thought.addIntProperty("rating");
         thought.addBooleanProperty("shared");

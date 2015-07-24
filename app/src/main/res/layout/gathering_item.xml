@@ -15,7 +15,7 @@
         android:clipChildren="false"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@+id/gathering_item_delete_icon_container"
+        android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
         android:orientation="vertical">
 
@@ -42,6 +42,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="1"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:layout_gravity="center"/>
 
@@ -71,6 +72,7 @@
         android:layout_width="@dimen/icon_large"
         android:layout_height="@dimen/icon_large"
         android:layout_alignParentRight="true"
+        android:layout_toLeftOf="@+id/thoughts_info"
         android:layout_centerVertical="true"
         android:background="@drawable/circle_button_background">
 
@@ -88,7 +90,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerVertical="true"
-        android:layout_toLeftOf="@+id/gathering_item_vote_container"
+        android:layout_toRightOf="@+id/gathering_item_vote_container"
         layout="@layout/thoughts_generic"/>
 
 

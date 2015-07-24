@@ -25,9 +25,11 @@ public class ThoughtDao extends AbstractDao<Thought, String> {
     public static class Properties {
         public final static Property Key = new Property(0, String.class, "key", true, "KEY");
         public final static Property Category = new Property(1, Integer.class, "category", false, "CATEGORY");
-        public final static Property Text = new Property(2, String.class, "text", false, "TEXT");
-        public final static Property Rating = new Property(3, Integer.class, "rating", false, "RATING");
-        public final static Property Shared = new Property(4, Boolean.class, "shared", false, "SHARED");
+        public final static Property Author = new Property(2, String.class, "author", false, "AUTHOR");
+        public final static Property Date = new Property(3, java.util.Date.class, "date", false, "DATE");
+        public final static Property Text = new Property(4, String.class, "text", false, "TEXT");
+        public final static Property Rating = new Property(5, Integer.class, "rating", false, "RATING");
+        public final static Property Shared = new Property(6, Boolean.class, "shared", false, "SHARED");
     };
 
 
@@ -45,9 +47,11 @@ public class ThoughtDao extends AbstractDao<Thought, String> {
         db.execSQL("CREATE TABLE " + constraint + "'THOUGHT' (" + //
                 "'KEY' TEXT PRIMARY KEY NOT NULL UNIQUE ," + // 0: key
                 "'CATEGORY' INTEGER," + // 1: category
-                "'TEXT' TEXT," + // 2: text
-                "'RATING' INTEGER," + // 3: rating
-                "'SHARED' INTEGER);"); // 4: shared
+                "'AUTHOR' TEXT," + // 2: author
+                "'DATE' INTEGER," + // 3: date
+                "'TEXT' TEXT," + // 4: text
+                "'RATING' INTEGER," + // 5: rating
+                "'SHARED' INTEGER);"); // 6: shared
     }
 
     /** Drops the underlying database table. */
@@ -71,19 +75,29 @@ public class ThoughtDao extends AbstractDao<Thought, String> {
             stmt.bindLong(2, category);
         }
  
+        String author = entity.getAuthor();
+        if (author != null) {
+            stmt.bindString(3, author);
+        }
+ 
+        java.util.Date date = entity.getDate();
+        if (date != null) {
+            stmt.bindLong(4, date.getTime());
+        }
+ 
         String text = entity.getText();
         if (text != null) {
-            stmt.bindString(3, text);
+            stmt.bindString(5, text);
         }
  
         Integer rating = entity.getRating();
         if (rating != null) {
-            stmt.bindLong(4, rating);
+            stmt.bindLong(6, rating);
         }
  
         Boolean shared = entity.getShared();
         if (shared != null) {
-            stmt.bindLong(5, shared ? 1l: 0l);
+            stmt.bindLong(7, shared ? 1l: 0l);
         }
     }
 
@@ -99,9 +113,11 @@ public class ThoughtDao extends AbstractDao<Thought, String> {
         Thought entity = new Thought( //
             cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0), // key
             cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1), // category
-            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // text
-            cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3), // rating
-            cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0 // shared
+            cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2), // author
+            cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)), // date
+            cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4), // text
+            cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5), // rating
+            cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0 // shared
         );
         return entity;
     }
@@ -111,9 +127,11 @@ public class ThoughtDao extends AbstractDao<Thought, String> {
     public void readEntity(Cursor cursor, Thought entity, int offset) {
         entity.setKey(cursor.isNull(offset + 0) ? null : cursor.getString(offset + 0));
         entity.setCategory(cursor.isNull(offset + 1) ? null : cursor.getInt(offset + 1));
-        entity.setText(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
-        entity.setRating(cursor.isNull(offset + 3) ? null : cursor.getInt(offset + 3));
-        entity.setShared(cursor.isNull(offset + 4) ? null : cursor.getShort(offset + 4) != 0);
+        entity.setAuthor(cursor.isNull(offset + 2) ? null : cursor.getString(offset + 2));
+        entity.setDate(cursor.isNull(offset + 3) ? null : new java.util.Date(cursor.getLong(offset + 3)));
+        entity.setText(cursor.isNull(offset + 4) ? null : cursor.getString(offset + 4));
+        entity.setRating(cursor.isNull(offset + 5) ? null : cursor.getInt(offset + 5));
+        entity.setShared(cursor.isNull(offset + 6) ? null : cursor.getShort(offset + 6) != 0);
      }
     
     /** @inheritdoc */

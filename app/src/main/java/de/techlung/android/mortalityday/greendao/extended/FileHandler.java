@@ -1,4 +1,4 @@
-package de.techlung.android.mortalityday.files;
+package de.techlung.android.mortalityday.greendao.extended;
 
 import android.content.Context;
 

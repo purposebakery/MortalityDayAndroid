@@ -1,13 +1,11 @@
 package de.techlung.android.mortalityday.util;
 
-import java.util.ArrayList;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-import java.util.List;
 
 import de.techlung.android.mortalityday.enums.Frequency;
-import de.techlung.android.mortalityday.enums.WeekDay;
 import de.techlung.android.mortalityday.settings.Preferences;
 
 public final class MortalityDayUtil {
@@ -15,9 +13,14 @@ public final class MortalityDayUtil {
     private MortalityDayUtil() {
 
     }
+    public static boolean isMortalityDay(){
+        Calendar day = new GregorianCalendar();
+        day.setTime(new Date());
+        return isMortalityDay(day);
+    }
 
-    public static boolean isMortalityDay() {
-        WeekDay weekDay = getWeekDay();
+    public static boolean isMortalityDay(Calendar day) {
+        int weekDay = day.get(Calendar.DAY_OF_WEEK);
 
         if (Preferences.getFrequency() == Frequency.ONCE_A_WEEK) {
             if (weekDay == Preferences.getDay1()) {
@@ -32,23 +35,27 @@ public final class MortalityDayUtil {
         return false;
     }
 
-    public static WeekDay getWeekDay() {
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(new Date());
-        WeekDay weekDay = WeekDay.getWeekdayFromCalendarWeekday(calendar.get(Calendar.DAY_OF_WEEK));
-        return weekDay;
-    }
+    /**
+     * Get next mortality day. skip current day if today is a mortality day.
+     * @return
+     */
+    public static Calendar getNextMortalityDay() {
+        Calendar day = new GregorianCalendar();
+        day.setTime(new Date());
 
-    public static WeekDay getNextMortalityDay() {
-        List<WeekDay> mortalityDays = new ArrayList<WeekDay>();
-        mortalityDays.add(Preferences.getDay1());
-        if (Preferences.getFrequency() == Frequency.TWICE_A_WEEK) {
-            mortalityDays.add(Preferences.getDay2());
+        day.add(Calendar.MINUTE, 1440); // add one Day
+
+        while (!isMortalityDay(day)) {
+            day.add(Calendar.MINUTE, 1440); // add one Day
         }
 
-        WeekDay currentWeekDay = getWeekDay();
-        // TODO get next
-
-        return currentWeekDay;
+        return day;
     }
+
+    public static String getDateFormatted(long time) {
+        Date date = new Date(time);
+        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+        return format.format(date);
+    }
+
 }

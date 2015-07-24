@@ -3,19 +3,20 @@ package de.techlung.android.mortalityday.settings;
 import com.orhanobut.hawk.Hawk;
 import com.pixplicity.easyprefs.library.Prefs;
 
-import de.techlung.android.mortalityday.MainActivity;
-import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.enums.Frequency;
-import de.techlung.android.mortalityday.enums.WeekDay;
 
 public class Preferences {
+    private static final String FIRST_START = "FIRST_START";
+
     private static final String FREQUENCY = "KEY_FREQENCY";
     private static final String DAY1 = "KEY_DAY1";
     private static final String DAY2 = "KEY_DAY2";
     private static final String DEVICE_ID = "KEY_DEVICE_ID";
 
     private static final String USER_NAME = "USER_NAME";
+    private static final String USER_NAME_DEFAULT = "Anonymous";
     private static final String USER_PASSWORD = "USER_PASSWORD";
+    private static final String USER_PASSWORD_DEFAULT = "Anonymous";
 
     private static final String KEY_AUTOMATIC_SHARING = "KEY_AUTOMATIC_SHARING";
 
@@ -31,12 +32,12 @@ public class Preferences {
         return Frequency.valueOf(Prefs.getString(FREQUENCY, Frequency.ONCE_A_WEEK.name()));
     }
 
-    public static WeekDay getDay1() {
-        return WeekDay.valueOf(Prefs.getString(DAY1, WeekDay.SATURDAY.name()));
+    public static int getDay1() {
+        return Integer.parseInt(Prefs.getString(DAY1, "7"));
     }
 
-    public static WeekDay getDay2() {
-        return WeekDay.valueOf(Prefs.getString(DAY2, WeekDay.THURSDAY.name()));
+    public static int getDay2() {
+        return Integer.parseInt(Prefs.getString(DAY2, "5"));
     }
 
     public static boolean isAutomaticSharing() {
@@ -55,7 +56,7 @@ public class Preferences {
     }
 
     public static String getUserName() {
-        return Hawk.get(USER_NAME);
+        return Hawk.get(USER_NAME, USER_NAME_DEFAULT);
     }
 
     public static void setUserPassword(String userPassword) {
@@ -63,8 +64,15 @@ public class Preferences {
     }
 
     public static String getUserPassword() {
-        return Hawk.get(USER_PASSWORD);
+        return Hawk.get(USER_PASSWORD, USER_PASSWORD_DEFAULT);
     }
 
+    public static void setFirstStart(boolean firstStart) {
+        Prefs.putBoolean(FIRST_START, firstStart);
+    }
+
+    public static boolean getFirstStart() {
+        return Prefs.getBoolean(FIRST_START, true);
+    }
 
 }

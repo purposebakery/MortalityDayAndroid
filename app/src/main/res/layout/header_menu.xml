@@ -28,4 +28,21 @@
         android:textSize="20sp"
         android:textStyle="bold"/>
 
+
+    <RelativeLayout
+        android:id="@+id/header_more"
+        android:layout_width="@dimen/header_menu_height"
+        android:layout_height="@dimen/header_menu_height"
+        android:layout_alignParentRight="true">
+
+        <ImageView
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_action_more_vert" />
+
+
+    </RelativeLayout>
+
+
 </RelativeLayout>
