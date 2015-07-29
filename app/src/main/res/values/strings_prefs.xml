@@ -2,7 +2,13 @@
 <resources>
     <string name="prefs_title">Settings</string>
 
+
     <string name="prefs_day_title">Mortality Day</string>
+
+    <string name="prefs_notify">Display Notification</string>
+    <string name="prefs_notify_summary">Notify me when its my mortality day</string>
+    <string name="prefs_notify_key">KEY_NOTIFY</string>
+
     <string name="prefs_day_fequency">Frequency</string>
     <string name="prefs_day_fequency_key">KEY_FREQENCY</string>
     <string-array name="prefs_day_fequency_entries">

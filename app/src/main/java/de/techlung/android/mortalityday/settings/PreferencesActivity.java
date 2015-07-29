@@ -21,8 +21,6 @@ public class PreferencesActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-
-        MortalityDayNotificationManager.setNextNotification(this);
     }
 
     private void checkFirstStart() {

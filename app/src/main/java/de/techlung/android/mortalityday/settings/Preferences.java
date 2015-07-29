@@ -1,12 +1,18 @@
 package de.techlung.android.mortalityday.settings;
 
+import android.content.Context;
+import android.content.ContextWrapper;
+
 import com.orhanobut.hawk.Hawk;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import de.techlung.android.mortalityday.enums.Frequency;
+import de.techlung.android.mortalityday.util.DeviceUtil;
 
 public class Preferences {
     private static final String FIRST_START = "FIRST_START";
+
+    private static final String NOTIFY = "KEY_NOTIFY";
 
     private static final String FREQUENCY = "KEY_FREQENCY";
     private static final String DAY1 = "KEY_DAY1";
@@ -20,12 +26,18 @@ public class Preferences {
 
     private static final String KEY_AUTOMATIC_SHARING = "KEY_AUTOMATIC_SHARING";
 
+    private static boolean isInited = false;
+
     public static String getDeviceId() {
         return Prefs.getString(DEVICE_ID, null);
     }
 
     public static void setDeviceId(String deviceId) {
         Prefs.putString(DEVICE_ID, deviceId);
+    }
+
+    public static boolean isNotifyEnabled() {
+        return Prefs.getBoolean(NOTIFY, true);
     }
 
     public static Frequency getFrequency() {
@@ -75,4 +87,22 @@ public class Preferences {
         return Prefs.getBoolean(FIRST_START, true);
     }
 
+    public static void initPreferences(Context context) {
+        if (isInited) {
+            return;
+        }
+
+        isInited = true;
+
+        new Prefs.Builder()
+                .setContext(context)
+                .setMode(ContextWrapper.MODE_PRIVATE)
+                .setPrefsName(context.getPackageName())
+                .setUseDefaultSharedPreference(true)
+                .build();
+
+        if (Preferences.getDeviceId() == null) {
+            Preferences.setDeviceId(DeviceUtil.getDeviceId(context));
+        }
+    }
 }

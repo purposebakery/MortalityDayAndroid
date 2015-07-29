@@ -18,7 +18,6 @@
         android:id="@+id/thoughts_edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:lines="4"
-        android:hint="thought..."/>
+        android:lines="4"/>
 
 </LinearLayout>

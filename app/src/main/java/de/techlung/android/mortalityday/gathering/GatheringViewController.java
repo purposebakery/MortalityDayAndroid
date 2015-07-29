@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.PopupMenu;
 import android.widget.TextView;
 
 import com.baasbox.android.BaasBox;
@@ -29,8 +32,10 @@ import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 import de.techlung.android.mortalityday.util.MortalityDayUtil;
 
-public class GatheringViewController {
+public class GatheringViewController implements PopupMenu.OnMenuItemClickListener{
     public static final String TAG = GatheringViewController.class.getName();
+
+    private enum Sort {DATE_DESC, RATING_DESC}
 
     Activity activity;
     View view;
@@ -41,6 +46,7 @@ public class GatheringViewController {
     private RecyclerView.LayoutManager recyclerLayoutManager;
 
     private List<BaasDocument> thoughts = new ArrayList<BaasDocument>();
+    private Sort currentSort = Sort.DATE_DESC;
 
     public GatheringViewController(ViewGroup container) {
         activity = MainActivity.getInstance();
@@ -65,12 +71,22 @@ public class GatheringViewController {
     private void initData() {
         thoughts.clear();
         thoughts.addAll(ThoughtManager.getSharedThoughts());
-        Collections.sort(thoughts, new Comparator<BaasDocument>() {
-            @Override
-            public int compare(BaasDocument lhs, BaasDocument rhs) {
-                return rhs.getInt(ThoughtDao.Properties.Rating.name) - lhs.getInt(ThoughtDao.Properties.Rating.name);
-            }
-        });
+
+        if (currentSort == Sort.RATING_DESC) {
+            Collections.sort(thoughts, new Comparator<BaasDocument>() {
+                @Override
+                public int compare(BaasDocument lhs, BaasDocument rhs) {
+                    return rhs.getInt(ThoughtDao.Properties.Rating.name) - lhs.getInt(ThoughtDao.Properties.Rating.name);
+                }
+            });
+        } else if (currentSort == Sort.DATE_DESC) {
+            Collections.sort(thoughts, new Comparator<BaasDocument>() {
+                @Override
+                public int compare(BaasDocument lhs, BaasDocument rhs) {
+                    return (int) (rhs.getLong(ThoughtDao.Properties.Date.name) - lhs.getLong(ThoughtDao.Properties.Date.name));
+                }
+            });
+        }
     }
 
     public void reloadData() {
@@ -96,9 +112,33 @@ public class GatheringViewController {
         recyclerView.setAdapter(recyclerAdapter);
     }
 
+    public void showPopupMenu(View v) {
+        PopupMenu popup = new PopupMenu(activity, v);
+        MenuInflater inflater = popup.getMenuInflater();
+        popup.setOnMenuItemClickListener(this);
+        inflater.inflate(R.menu.gathering_menu, popup.getMenu());
+        popup.show();
+    }
+
     public void reloadAdapter() {
         initData();
         recyclerAdapter.notifyDataSetChanged();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.gathering_menu_sort_date:
+                currentSort = Sort.DATE_DESC;
+                reloadAdapter();
+                return true;
+            case R.id.gathering_menu_sort_rating:
+                currentSort = Sort.RATING_DESC;
+                reloadAdapter();
+                return true;
+            default:
+                return false;
+        }
     }
 
     public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
@@ -155,7 +195,7 @@ public class GatheringViewController {
             holder.author.setText(thought.getString(ThoughtDao.Properties.Author.name));
             holder.date.setText(MortalityDayUtil.getDateFormatted(thought.getLong(ThoughtDao.Properties.Date.name)));
 
-            if (DaoFactory.getInstanceLocal().getExtendedThoughtMetaDao().getThoughtMeta(thought.getString(ThoughtDao.Properties.Key.name)) != null){
+            if (!Preferences.isAdmin() && DaoFactory.getInstanceLocal().getExtendedThoughtMetaDao().getThoughtMeta(thought.getString(ThoughtDao.Properties.Key.name)) != null){
                 holder.voteUp.setVisibility(View.INVISIBLE);
                 holder.voteDown.setVisibility(View.INVISIBLE);
             } else {

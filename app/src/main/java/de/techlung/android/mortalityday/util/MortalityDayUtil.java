@@ -49,6 +49,10 @@ public final class MortalityDayUtil {
             day.add(Calendar.MINUTE, 1440); // add one Day
         }
 
+        day.set(Calendar.HOUR_OF_DAY, 0);
+        day.set(Calendar.MINUTE,0);
+        day.set(Calendar.SECOND,0);
+        day.set(Calendar.MILLISECOND, 0);
         return day;
     }
 

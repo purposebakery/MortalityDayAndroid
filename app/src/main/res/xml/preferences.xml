@@ -28,6 +28,12 @@
             android:summary="%s"
             android:defaultValue="5"/>
 
+        <CheckBoxPreference
+            android:key="@string/prefs_notify_key"
+            android:title="@string/prefs_notify"
+            android:summary="@string/prefs_notify_summary"
+            android:defaultValue="true"/>
+
     </PreferenceCategory>
 
     <PreferenceCategory

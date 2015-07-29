@@ -1,31 +1,21 @@
 package de.techlung.android.mortalityday;
 
-import android.content.ContextWrapper;
+import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 
 import com.baasbox.android.BaasBox;
-import com.baasbox.android.BaasDocument;
-import com.baasbox.android.BaasHandler;
-import com.baasbox.android.BaasResult;
-import com.baasbox.android.BaasUser;
-import com.baasbox.android.RequestToken;
 import com.orhanobut.hawk.Hawk;
-import com.orhanobut.hawk.HawkBuilder;
 import com.orhanobut.hawk.LogLevel;
-import com.pixplicity.easyprefs.library.Prefs;
-
-import java.util.List;
 
 import de.techlung.android.mortalityday.baasbox.Constants;
 import de.techlung.android.mortalityday.logger.ExceptionLogger;
 import de.techlung.android.mortalityday.settings.Preferences;
-import de.techlung.android.mortalityday.util.DeviceUtil;
-import de.techlung.android.mortalityday.util.Toaster;
 
-import static com.orhanobut.hawk.HawkBuilder.*;
+import static com.orhanobut.hawk.HawkBuilder.EncryptionMethod;
+import static com.orhanobut.hawk.HawkBuilder.newSqliteStorage;
 
+@SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {
     public static final String TAG = BaseActivity.class.getName();
 
@@ -56,16 +46,7 @@ public class BaseActivity extends AppCompatActivity {
     }
 
     private void initPreferences() {
-        new Prefs.Builder()
-                .setContext(this)
-                .setMode(ContextWrapper.MODE_PRIVATE)
-                .setPrefsName(getPackageName())
-                .setUseDefaultSharedPreference(true)
-                .build();
-
-        if (Preferences.getDeviceId() == null) {
-            Preferences.setDeviceId(DeviceUtil.getDeviceId(this));
-        }
+        Preferences.initPreferences(this);
     }
 
     private void initSafePreferences() {

@@ -4,6 +4,7 @@
 
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED"/>
 
     <application
         android:allowBackup="true"
@@ -25,6 +26,16 @@
             android:name=".settings.PreferencesActivity"
             android:label="@string/prefs_title" >
         </activity>
+
+        <receiver android:name=".notification.NotifyMortalReceiver"
+            android:enabled="true">
+        </receiver>
+        <receiver android:name=".notification.RebootReceiver"
+            android:enabled="true">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED"></action>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

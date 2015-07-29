@@ -29,9 +29,9 @@ public class LoginFragment extends DialogFragment {
     public static final String TAG = LoginFragment.class.getName();
 
     @Bind(R.id.login_login)
-    Button login;
+    TextView login;
     @Bind(R.id.login_register)
-    Button register;
+    TextView register;
     @Bind(R.id.login_username)
     EditText username;
     @Bind(R.id.login_password)

@@ -8,10 +8,14 @@ import de.techlung.android.mortalityday.R;
 public class Toaster {
 
     public static void show(String message) {
-        Toast.makeText(MainActivity.getInstance(), message, Toast.LENGTH_SHORT).show();
+        if (MainActivity.getInstance() != null) {
+            Toast.makeText(MainActivity.getInstance(), message, Toast.LENGTH_LONG).show();
+        }
     }
 
     public static void showNetworkError() {
-        Toast.makeText(MainActivity.getInstance(), MainActivity.getInstance().getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
+        if (MainActivity.getInstance() != null) {
+            Toast.makeText(MainActivity.getInstance(), MainActivity.getInstance().getString(R.string.error_no_network), Toast.LENGTH_SHORT).show();
+        }
     }
 }

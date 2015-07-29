@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="@dimen/drawer_width"
     android:layout_height="match_parent"
     android:elevation="10dp"
-    android:background="@color/grey_very_light">
+    android:background="@color/grey_very_light"
+    tools:ignore="UnusedAttribute">
 
     <ImageView
         android:id="@+id/logo"
@@ -25,9 +27,9 @@
             android:layout_width="@dimen/icon_small"
             android:layout_height="@dimen/icon_small"
             android:alpha="@dimen/icon_alpha"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
             android:src="@drawable/ic_action_settings"/>
 
         <TextView
@@ -52,9 +54,9 @@
             android:layout_width="@dimen/icon_small"
             android:layout_height="@dimen/icon_small"
             android:alpha="@dimen/icon_alpha"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
             android:src="@drawable/ic_action_account_circle"/>
 
         <TextView
@@ -85,9 +87,9 @@
             android:layout_width="@dimen/icon_small"
             android:layout_height="@dimen/icon_small"
             android:alpha="@dimen/icon_alpha"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginRight="18dp"
-            android:layout_marginLeft="18dp"
             android:src="@drawable/ic_action_cloud_download"/>
 
         <TextView
@@ -98,6 +100,49 @@
             android:textColor="@color/text_dark"
             android:layout_gravity="center_vertical" />
     </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/drawer_delete"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/drawer_item_height"
+        android:orientation="horizontal"
+        android:layout_below="@+id/drawer_restore"
+        android:background="@drawable/rect_button_background">
+
+        <ImageView
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:alpha="@dimen/icon_alpha"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_action_delete"/>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/drawer_delete"
+            android:textSize="@dimen/text_size_default"
+            android:textColor="@color/text_dark"
+            android:layout_gravity="center_vertical" />
+    </LinearLayout>
+
+    <RelativeLayout
+        android:id="@+id/drawer_info"
+        android:layout_width="@dimen/drawer_item_height"
+        android:layout_height="@dimen/drawer_item_height"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="4dp"
+        android:background="@drawable/circle_button_background">
+
+        <ImageView
+            android:layout_width="@dimen/icon_small"
+            android:layout_height="@dimen/icon_small"
+            android:alpha="@dimen/icon_alpha"
+            android:layout_centerInParent="true"
+            android:src="@drawable/ic_action_help"/>
+
+    </RelativeLayout>
 
 
 </RelativeLayout>

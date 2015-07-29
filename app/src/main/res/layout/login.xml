@@ -25,7 +25,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/button_height">
 
-        <Button
+        <TextView
             android:id="@+id/login_register"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"
@@ -34,7 +34,7 @@
             android:background="@drawable/rect_button_background"/>
 
 
-        <Button
+        <TextView
             android:id="@+id/login_login"
             android:layout_width="0dp"
             android:layout_height="@dimen/button_height"

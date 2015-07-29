@@ -1,14 +1,17 @@
 package de.techlung.android.mortalityday;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.RelativeLayout;
 
 import com.daimajia.androidanimations.library.Techniques;
@@ -18,6 +21,7 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import de.techlung.android.mortalityday.baasbox.BaasBoxMortalityDay;
 import de.techlung.android.mortalityday.gathering.GatheringViewController;
+import de.techlung.android.mortalityday.greendao.extended.DaoFactory;
 import de.techlung.android.mortalityday.login.LoginFragment;
 import de.techlung.android.mortalityday.messages.MessageManager;
 import de.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
@@ -25,6 +29,7 @@ import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.settings.PreferencesActivity;
 import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 import de.techlung.android.mortalityday.thoughts.ThoughtsViewController;
+import de.techlung.android.mortalityday.util.AlertUtil;
 import de.techlung.android.mortalityday.util.ToolBox;
 
 
@@ -44,11 +49,16 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
     @Bind(R.id.header_menu) View headerMenuButton;
     @Bind(R.id.header_more) View headerMoreButton;
 
+    @Bind(R.id.drawer_delete) View drawerDelete;
     @Bind(R.id.drawer_restore) View drawerRestore;
     @Bind(R.id.drawer_settings) View drawerSettings;
     @Bind(R.id.drawer_login) View drawerLogin;
+    @Bind(R.id.drawer_info) View drawerInfo;
 
     @Bind(R.id.message_container) RelativeLayout messageContainer;
+
+    @Bind(R.id.bg01) ImageView backgroundThoughts;
+    @Bind(R.id.bg02) ImageView backgroundGathering;
 
     ThoughtsViewController thoughtsViewContoller;
     GatheringViewController gatheringViewController;
@@ -127,11 +137,13 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
             }
         });
 
-        headerMoreButton.setVisibility(View.GONE);
+        headerMoreButton.setVisibility(View.INVISIBLE);
         headerMoreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO open more menü to sort Data 
+                if (gatheringViewController != null && currentState == State.GATHERING) {
+                    gatheringViewController.showPopupMenu(headerMoreButton);
+                }
             }
         });
     }
@@ -159,7 +171,35 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
         drawerRestore.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                BaasBoxMortalityDay.restoreThoughts();
+                AlertUtil.askUserConfirmation(R.string.warning_restore, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        BaasBoxMortalityDay.restoreThoughts();
+                    }
+                });
+            }
+        });
+
+        drawerDelete.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertUtil.askUserConfirmation(R.string.warning_delete, new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    DaoFactory.getInstanceLocal().getExtendedThoughtDao().deleteAll();
+                    if (thoughtsViewContoller != null) {
+                        thoughtsViewContoller.reloadAdapter();
+                    }
+                }
+            });
+            }
+        });
+
+        drawerInfo.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AlertUtil.showInfoAlert();
             }
         });
     }
@@ -170,14 +210,22 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
         pager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                if (position == 0) {
+                    backgroundGathering.setAlpha(positionOffset);
+                    backgroundThoughts.setAlpha(1f - positionOffset);
+                }
             }
 
             @Override
             public void onPageSelected(int position) {
                 if (position == 0) {
                     changeState(State.THOUGHTS);
+                    backgroundThoughts.setAlpha(1f);
+                    backgroundGathering.setAlpha(0f);
                 } else {
                     changeState(State.GATHERING);
+                    backgroundThoughts.setAlpha(0f);
+                    backgroundGathering.setAlpha(1f);
                 }
             }
 
@@ -197,6 +245,8 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
             @Override
             public void onClick(View v) {
                 pager.setCurrentItem(1);
+
+
                 if (gatheringViewController != null) {
                     gatheringViewController.reloadData();
                 }

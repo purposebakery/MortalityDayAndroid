@@ -24,6 +24,7 @@ import de.techlung.android.mortalityday.greendao.generated.ThoughtDao;
 import de.techlung.android.mortalityday.greendao.generated.ThoughtMeta;
 import de.techlung.android.mortalityday.settings.Preferences;
 import de.techlung.android.mortalityday.thoughts.ThoughtManager;
+import de.techlung.android.mortalityday.util.AlertUtil;
 import de.techlung.android.mortalityday.util.Toaster;
 
 public class BaasBoxMortalityDay {
@@ -103,6 +104,7 @@ public class BaasBoxMortalityDay {
     }
 
     public static void restoreThoughts() {
+
         checkUserAuthenticatedAndDisplayErrorMessage();
 
         BaasDocument.fetchAll(Constants.COLLECTION_THOUGHTS,
@@ -136,6 +138,7 @@ public class BaasBoxMortalityDay {
                     }
                 });
     }
+
 
     public static void voteUpThought(BaasDocument thought) {
         voteThought(thought, VOTE_UP);
@@ -208,4 +211,5 @@ public class BaasBoxMortalityDay {
 
         }
     }
+
 }

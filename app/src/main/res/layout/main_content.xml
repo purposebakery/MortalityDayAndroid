@@ -2,13 +2,37 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/grey">
+    android:clipChildren="false"
+    android:background="@color/grey_light">
+
 
     <include
         android:id="@+id/header"
         android:layout_width="match_parent"
         android:layout_height="@dimen/header_height"
         layout="@layout/header"/>
+
+    <ImageView
+        android:id="@+id/bg01"
+        android:layout_below="@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg02"
+        android:scaleType="centerCrop"/>
+
+    <ImageView
+        android:id="@+id/bg02"
+        android:layout_below="@id/header"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/bg01"
+        android:scaleType="centerCrop"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@color/grey_light"
+        android:alpha="0.4"/>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/main_pager"
