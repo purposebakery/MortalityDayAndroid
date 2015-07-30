@@ -58,7 +58,7 @@ public final class MortalityDayUtil {
 
     public static String getDateFormatted(long time) {
         Date date = new Date(time);
-        SimpleDateFormat format = new SimpleDateFormat("dd.mm.yyyy");
+        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
         return format.format(date);
     }
 

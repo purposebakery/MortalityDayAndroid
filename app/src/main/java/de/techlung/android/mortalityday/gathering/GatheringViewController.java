@@ -1,6 +1,7 @@
 package de.techlung.android.mortalityday.gathering;
 
 import android.app.Activity;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -41,6 +42,7 @@ public class GatheringViewController implements PopupMenu.OnMenuItemClickListene
     View view;
 
     @Bind(R.id.thoughts_recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.swipe_container) SwipeRefreshLayout swipeRefreshLayout;
 
     private RecyclerView.Adapter recyclerAdapter;
     private RecyclerView.LayoutManager recyclerLayoutManager;
@@ -89,8 +91,8 @@ public class GatheringViewController implements PopupMenu.OnMenuItemClickListene
         }
     }
 
-    public void reloadData() {
-        BaasBoxMortalityDay.getAllThoughts();
+    public void reloadData(BaasBoxMortalityDay.GetAllThoughtsListener listener) {
+        BaasBoxMortalityDay.getAllThoughts(listener);
     }
 
     private void initList() {
@@ -101,6 +103,18 @@ public class GatheringViewController implements PopupMenu.OnMenuItemClickListene
         // use a linear layout manager
         recyclerLayoutManager = new LinearLayoutManager(activity);
         recyclerView.setLayoutManager(recyclerLayoutManager);
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                reloadData(new BaasBoxMortalityDay.GetAllThoughtsListener() {
+                    @Override
+                    public void onGetAllThoughts(boolean success) {
+                        swipeRefreshLayout.setRefreshing(false);
+                    }
+                });
+            }
+        });
 
         // specify an recyclerAdapter (see also next example)
         initListAdapter();
@@ -157,7 +171,6 @@ public class GatheringViewController implements PopupMenu.OnMenuItemClickListene
             @Bind(R.id.gathering_item_rating) TextView rating;
             @Bind(R.id.gathering_item_root) View root;
             @Bind(R.id.gathering_item_voteup_icon_container) View voteUp;
-            @Bind(R.id.gathering_item_votedown_icon_container) View voteDown;
             @Bind(R.id.gathering_item_delete_icon_container) View delete;
 
             public ViewHolder(View v) {
@@ -196,23 +209,14 @@ public class GatheringViewController implements PopupMenu.OnMenuItemClickListene
             holder.date.setText(MortalityDayUtil.getDateFormatted(thought.getLong(ThoughtDao.Properties.Date.name)));
 
             if (!Preferences.isAdmin() && DaoFactory.getInstanceLocal().getExtendedThoughtMetaDao().getThoughtMeta(thought.getString(ThoughtDao.Properties.Key.name)) != null){
-                holder.voteUp.setVisibility(View.INVISIBLE);
-                holder.voteDown.setVisibility(View.INVISIBLE);
+                holder.voteUp.setVisibility(View.GONE);
             } else {
                 holder.voteUp.setVisibility(View.VISIBLE);
-                holder.voteDown.setVisibility(View.VISIBLE);
 
                 holder.voteUp.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
                         voteUp(thought);
-                    }
-                });
-
-                holder.voteDown.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        voteDown(thought);
                     }
                 });
             }

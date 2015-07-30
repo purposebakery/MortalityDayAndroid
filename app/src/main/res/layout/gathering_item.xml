@@ -8,7 +8,7 @@
     android:paddingRight="8dp"
     android:paddingTop="16dp"
     android:paddingBottom="16dp"
-    android:background="@color/grey_light">
+    android:background="@color/grey_very_light">
 
     <LinearLayout
         android:id="@+id/gathering_item_vote_container"
@@ -17,7 +17,17 @@
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_centerVertical="true"
-        android:orientation="vertical">
+        android:orientation="horizontal">
+
+
+        <TextView
+            android:id="@+id/gathering_item_rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="60"
+            android:layout_gravity="center"/>
 
         <RelativeLayout
             android:id="@+id/gathering_item_voteup_icon_container"
@@ -37,31 +47,6 @@
 
         </RelativeLayout>
 
-        <TextView
-            android:id="@+id/gathering_item_rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textSize="18sp"
-            android:textStyle="bold"
-            android:layout_gravity="center"/>
-
-        <RelativeLayout
-            android:id="@+id/gathering_item_votedown_icon_container"
-            android:clipChildren="false"
-            android:layout_width="@dimen/icon_normal"
-            android:layout_height="@dimen/icon_normal"
-            android:layout_alignParentRight="true"
-            android:layout_centerVertical="true"
-            android:background="@drawable/circle_button_background">
-
-            <ImageView
-                android:layout_width="@dimen/icon_small"
-                android:layout_height="@dimen/icon_small"
-                android:src="@drawable/ic_action_remove_circle"
-                android:alpha="@dimen/icon_alpha"
-                android:layout_centerInParent="true"/>
-
-        </RelativeLayout>
 
     </LinearLayout>
 

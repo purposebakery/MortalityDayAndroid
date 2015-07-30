@@ -3,6 +3,7 @@ package de.techlung.android.mortalityday;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -31,6 +32,7 @@ import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 import de.techlung.android.mortalityday.thoughts.ThoughtsViewController;
 import de.techlung.android.mortalityday.util.AlertUtil;
 import de.techlung.android.mortalityday.util.ToolBox;
+import jp.wasabeef.blurry.Blurry;
 
 
 public class MainActivity extends BaseActivity implements ThoughtManager.LocalThoughtsChangedListener, ThoughtManager.SharedThoughtsChangedListener {
@@ -104,6 +106,8 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
         initDrawer();
         initViewPager();
         initMessage();
+
+        //blurBackground();
 
         ThoughtManager.addLocalThoughtsChangedListener(this);
         ThoughtManager.addSharedThoughtsChangedListener(this);
@@ -185,14 +189,14 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
             @Override
             public void onClick(View v) {
                 AlertUtil.askUserConfirmation(R.string.warning_delete, new DialogInterface.OnClickListener() {
-                @Override
-                public void onClick(DialogInterface dialog, int which) {
-                    DaoFactory.getInstanceLocal().getExtendedThoughtDao().deleteAll();
-                    if (thoughtsViewContoller != null) {
-                        thoughtsViewContoller.reloadAdapter();
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        DaoFactory.getInstanceLocal().getExtendedThoughtDao().deleteAll();
+                        if (thoughtsViewContoller != null) {
+                            thoughtsViewContoller.reloadAdapter();
+                        }
                     }
-                }
-            });
+                });
             }
         });
 
@@ -213,6 +217,8 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
                 if (position == 0) {
                     backgroundGathering.setAlpha(positionOffset);
                     backgroundThoughts.setAlpha(1f - positionOffset);
+
+                    pagerTabBar.setTranslationX(positionOffset * (ToolBox.getScreenWidthPx(MainActivity.getInstance()) / 2));
                 }
             }
 
@@ -222,10 +228,12 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
                     changeState(State.THOUGHTS);
                     backgroundThoughts.setAlpha(1f);
                     backgroundGathering.setAlpha(0f);
+                    pagerTabBar.setTranslationX(0);
                 } else {
                     changeState(State.GATHERING);
                     backgroundThoughts.setAlpha(0f);
                     backgroundGathering.setAlpha(1f);
+                    pagerTabBar.setTranslationX(1 + ToolBox.getScreenWidthPx(MainActivity.getInstance()) / 2);
                 }
             }
 
@@ -246,9 +254,8 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
             public void onClick(View v) {
                 pager.setCurrentItem(1);
 
-
                 if (gatheringViewController != null) {
-                    gatheringViewController.reloadData();
+                    gatheringViewController.reloadData(null);
                 }
             }
         });
@@ -294,7 +301,7 @@ public class MainActivity extends BaseActivity implements ThoughtManager.LocalTh
     private void changeState(State state) {
         this.currentState = state;
 
-        animateTabBarToState(state);
+        //animateTabBarToState(state);
 
         if (state == State.THOUGHTS) {
             YoYo.with(Techniques.RotateOut).duration(TRANSITION_SPEED).playOn(headerMoreButton);

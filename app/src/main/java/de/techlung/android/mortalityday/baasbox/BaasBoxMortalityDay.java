@@ -2,6 +2,7 @@ package de.techlung.android.mortalityday.baasbox;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.support.annotation.Nullable;
 import android.util.Log;
 
 import com.baasbox.android.BaasBox;
@@ -36,7 +37,7 @@ public class BaasBoxMortalityDay {
     private static int VOTE_UP = 1;
     private static int VOTE_DOWN = -1;
 
-    public static void getAllThoughts() {
+    public static void getAllThoughts(@Nullable final GetAllThoughtsListener listener) {
         checkUserAuthenticatedAndDisplayErrorMessage();
 
         BaasDocument.fetchAll(Constants.COLLECTION_THOUGHTS, new BaasHandler<List<BaasDocument>>() {
@@ -56,8 +57,16 @@ public class BaasBoxMortalityDay {
                     Toaster.showNetworkError();
                     Log.e(TAG, baasResult.toString());
                 }
+
+                if (listener != null) {
+                    listener.onGetAllThoughts(baasResult.isSuccess());
+                }
             }
         });
+    }
+
+    public interface GetAllThoughtsListener {
+        void onGetAllThoughts(boolean success);
     }
 
     public static void sendThought(final Thought thought) {
