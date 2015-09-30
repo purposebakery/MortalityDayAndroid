@@ -13,6 +13,9 @@ import android.widget.TextView;
 
 import com.daimajia.androidanimations.library.Techniques;
 import com.daimajia.androidanimations.library.YoYo;
+import com.marshalchen.ultimaterecyclerview.UltimateRecyclerView;
+import com.marshalchen.ultimaterecyclerview.UltimateViewAdapter;
+import com.marshalchen.ultimaterecyclerview.animators.FadeInUpAnimator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,10 +36,10 @@ public class ThoughtsViewController {
     Activity activity;
     View view;
 
-    @Bind(R.id.thoughts_recycler_view) RecyclerView recyclerView;
+    @Bind(R.id.thoughts_recycler_view) UltimateRecyclerView recyclerView;
     @Bind(R.id.thoughts_add_button) View addButton;
 
-    private RecyclerView.Adapter recyclerAdapter;
+    private UltimateViewAdapter recyclerAdapter;
     private RecyclerView.LayoutManager recyclerLayoutManager;
 
     private List<Thought> thoughts = new ArrayList<Thought>();
@@ -84,6 +87,10 @@ public class ThoughtsViewController {
     private void initListAdapter() {
         recyclerAdapter = new MyAdapter(thoughts);
         recyclerView.setAdapter(recyclerAdapter);
+
+        recyclerView.setItemAnimator(new FadeInUpAnimator());
+        recyclerView.getItemAnimator().setAddDuration(300);
+        recyclerView.getItemAnimator().setRemoveDuration(300);
     }
 
     private void initAddButton() {
@@ -107,9 +114,9 @@ public class ThoughtsViewController {
         recyclerAdapter.notifyDataSetChanged();
     }
 
-    public class MyAdapter extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
+    public class MyAdapter extends UltimateViewAdapter<MyAdapter.ViewHolder> {
         private List<Thought> mDataset;
-
+        private ViewHolder vh;
         // Provide a reference to the views for each data item
         // Complex data items may need more than one view per item, and
         // you provide access to all the views for a data item in a view holder
@@ -135,14 +142,18 @@ public class ThoughtsViewController {
             mDataset = myDataset;
         }
 
-        // Create new views (invoked by the layout manager)
+
         @Override
-        public MyAdapter.ViewHolder onCreateViewHolder(ViewGroup parent,
-                                                       int viewType) {
+        public ViewHolder getViewHolder(View view) {
+            return null;
+        }
+
+        @Override
+        public ViewHolder onCreateViewHolder(ViewGroup viewGroup) {
             // create a new view
-            View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.thoughts_item, parent, false);
+            View v = LayoutInflater.from(activity).inflate(R.layout.thoughts_item, null, false);
             // set the view's size, margins, paddings and layout parameters
-            ViewHolder vh = new ViewHolder(v);
+            vh = new ViewHolder(v);
             return vh;
         }
 
@@ -187,10 +198,30 @@ public class ThoughtsViewController {
 
         }
 
+        @Override
+        public RecyclerView.ViewHolder onCreateHeaderViewHolder(ViewGroup viewGroup) {
+            return null;
+        }
+
+        @Override
+        public void onBindHeaderViewHolder(RecyclerView.ViewHolder viewHolder, int i) {
+
+        }
+
         // Return the size of your dataset (invoked by the layout manager)
         @Override
         public int getItemCount() {
             return mDataset.size();
+        }
+
+        @Override
+        public int getAdapterItemCount() {
+            return 0;
+        }
+
+        @Override
+        public long generateHeaderId(int i) {
+            return 0;
         }
     }
 }

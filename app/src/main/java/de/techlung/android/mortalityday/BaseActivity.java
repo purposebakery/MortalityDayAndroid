@@ -51,7 +51,7 @@ public class BaseActivity extends AppCompatActivity {
 
     private void initSafePreferences() {
         Hawk.init(this)
-                .setEncryptionMethod(EncryptionMethod.HIGHEST)
+                .setEncryptionMethod(EncryptionMethod.MEDIUM)
                 .setStorage(newSqliteStorage(this))
                 .setLogLevel(LogLevel.FULL)
                 .build();

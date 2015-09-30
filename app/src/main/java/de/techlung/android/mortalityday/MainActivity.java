@@ -32,7 +32,6 @@ import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 import de.techlung.android.mortalityday.thoughts.ThoughtsViewController;
 import de.techlung.android.mortalityday.util.AlertUtil;
 import de.techlung.android.mortalityday.util.ToolBox;
-import jp.wasabeef.blurry.Blurry;
 
 
 public class MainActivity extends BaseActivity implements ThoughtManager.LocalThoughtsChangedListener, ThoughtManager.SharedThoughtsChangedListener {

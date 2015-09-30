@@ -13,6 +13,6 @@ public class MortalityDayOpenHelper extends AbstractOpenHelper {
 
     @Override
     public String getMigrationHelperClassName() {
-        return "de.techlung.android.mortalityday.greendao.migration.mortalityday.MigrationHelper";
+        return "de.techlung.android.mortalityday.greendao.migration.mortalityday";
     }
 }
