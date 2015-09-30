@@ -42,7 +42,6 @@ public class MortalityDayDaoGenerator {
 
         // ISO XML
         Entity thought = createThoughtEntity(schema);
-        Entity thoughtmeta = createThoughtMetaEntity(schema);
 
         new DaoGenerator().generateAll(schema, ".");
     }
@@ -52,22 +51,8 @@ public class MortalityDayDaoGenerator {
         thought.setHasKeepSections(true);
 
         thought.addStringProperty("key").unique().primaryKey();
-        thought.addIntProperty("category");
-        thought.addStringProperty("author");
-        thought.addDateProperty("date");
         thought.addStringProperty("text");
-        thought.addIntProperty("rating");
-        thought.addBooleanProperty("shared");
-
-        return thought;
-    }
-
-    private static Entity createThoughtMetaEntity(Schema schema) {
-        Entity thought = schema.addEntity("ThoughtMeta");
-        thought.setHasKeepSections(true);
-
-        thought.addStringProperty("key").unique().primaryKey();
-        thought.addBooleanProperty("wasVoted");
+        thought.addStringProperty("category");
 
         return thought;
     }

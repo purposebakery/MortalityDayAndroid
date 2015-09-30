@@ -13,11 +13,4 @@
         android:layout_height="@dimen/header_menu_height"
         layout="@layout/header_menu"/>
 
-    <include
-        android:id="@+id/header_pagertabs"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/header_pagertabs_height"
-        layout="@layout/header_pagertabs"
-        android:layout_below="@id/header_menu"/>
-
 </RelativeLayout>

@@ -5,10 +5,8 @@ package de.techlung.android.mortalityday.greendao.generated;
 // KEEP INCLUDES - put your custom includes here
 import com.baasbox.android.BaasDocument;
 
-import java.util.Date;
-
 import de.techlung.android.mortalityday.baasbox.Constants;
-import de.techlung.android.mortalityday.settings.Preferences;
+import de.techlung.android.mortalityday.enums.ThoughtCategory;
 // KEEP INCLUDES END
 /**
  * Entity mapped to table THOUGHT.
@@ -16,12 +14,8 @@ import de.techlung.android.mortalityday.settings.Preferences;
 public class Thought {
 
     private String key;
-    private Integer category;
-    private String author;
-    private java.util.Date date;
     private String text;
-    private Integer rating;
-    private Boolean shared;
+    private String category;
 
     // KEEP FIELDS - put your custom fields here
     // KEEP FIELDS END
@@ -33,14 +27,10 @@ public class Thought {
         this.key = key;
     }
 
-    public Thought(String key, Integer category, String author, java.util.Date date, String text, Integer rating, Boolean shared) {
+    public Thought(String key, String text, String category) {
         this.key = key;
-        this.category = category;
-        this.author = author;
-        this.date = date;
         this.text = text;
-        this.rating = rating;
-        this.shared = shared;
+        this.category = category;
     }
 
     public String getKey() {
@@ -51,30 +41,6 @@ public class Thought {
         this.key = key;
     }
 
-    public Integer getCategory() {
-        return category;
-    }
-
-    public void setCategory(Integer category) {
-        this.category = category;
-    }
-
-    public String getAuthor() {
-        return author;
-    }
-
-    public void setAuthor(String author) {
-        this.author = author;
-    }
-
-    public java.util.Date getDate() {
-        return date;
-    }
-
-    public void setDate(java.util.Date date) {
-        this.date = date;
-    }
-
     public String getText() {
         return text;
     }
@@ -83,54 +49,37 @@ public class Thought {
         this.text = text;
     }
 
-    public Integer getRating() {
-        return rating;
+    public String getCategory() {
+        return category;
     }
 
-    public void setRating(Integer rating) {
-        this.rating = rating;
-    }
-
-    public Boolean getShared() {
-        return shared;
-    }
-
-    public void setShared(Boolean shared) {
-        this.shared = shared;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
     // KEEP METHODS - put your custom methods here
-    public BaasDocument createDocument() {
-        BaasDocument document = new BaasDocument(Constants.COLLECTION_THOUGHTS);
+    public ThoughtCategory getCategoryEnum() {
+        try {
+            return ThoughtCategory.valueOf(getCategory());
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return ThoughtCategory.DEFAULT;
+    }
+
+    public void setCategoryEnum(ThoughtCategory category) {
+        setCategory(category.name());
+    }
+
+    public BaasDocument createSubmitDocument() {
+        BaasDocument document = new BaasDocument(Constants.THOUGHTS_SUBMIT);
 
         document.put(ThoughtDao.Properties.Key.name, getKey());
-        document.put(ThoughtDao.Properties.Category.name, getCategory());
         document.put(ThoughtDao.Properties.Text.name, getText());
-        document.put(ThoughtDao.Properties.Author.name, Preferences.getUserName());
-        document.put(ThoughtDao.Properties.Rating.name, getRating());
-        document.put(ThoughtDao.Properties.Date.name, getDate().getTime());
+        document.put(ThoughtDao.Properties.Category.name, getCategory());
 
         return document;
-    }
-
-    private void setDocumentData(BaasDocument document) {
-        setKey(document.getString(ThoughtDao.Properties.Key.name));
-        setCategory(document.getInt(ThoughtDao.Properties.Category.name));
-        setText(document.getString(ThoughtDao.Properties.Text.name));
-        setDate(new Date(document.getLong(ThoughtDao.Properties.Date.name)));
-        setAuthor(document.getString(ThoughtDao.Properties.Author.name));
-        setRating(document.getInt(ThoughtDao.Properties.Rating.name));
-    }
-
-    private BaasDocument baasDocument;
-
-    public BaasDocument getDocument() {
-        return baasDocument;
-    }
-
-    public void setDocument(BaasDocument baasDocument) {
-        this.baasDocument = baasDocument;
-        setDocumentData(baasDocument);
     }
     // KEEP METHODS END
 

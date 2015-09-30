@@ -14,7 +14,6 @@
         android:padding="80dp"
         android:src="@drawable/logo"/>
 
-
     <LinearLayout
         android:id="@+id/drawer_settings"
         android:layout_width="match_parent"
@@ -41,91 +40,6 @@
             android:layout_gravity="center_vertical" />
     </LinearLayout>
 
-
-    <LinearLayout
-        android:id="@+id/drawer_login"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/drawer_item_height"
-        android:orientation="horizontal"
-        android:layout_below="@+id/drawer_settings"
-        android:background="@drawable/rect_button_background">
-
-        <ImageView
-            android:layout_width="@dimen/icon_small"
-            android:layout_height="@dimen/icon_small"
-            android:alpha="@dimen/icon_alpha"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_action_account_circle"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/drawer_login"
-            android:textSize="@dimen/text_size_default"
-            android:textColor="@color/text_dark"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
-
-    <View
-        android:id="@+id/separator"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_below="@+id/drawer_login"
-        android:background="@color/grey_light"/>
-
-    <LinearLayout
-        android:id="@+id/drawer_restore"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/drawer_item_height"
-        android:orientation="horizontal"
-        android:layout_below="@+id/separator"
-        android:background="@drawable/rect_button_background">
-
-        <ImageView
-            android:layout_width="@dimen/icon_small"
-            android:layout_height="@dimen/icon_small"
-            android:alpha="@dimen/icon_alpha"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_action_cloud_download"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/drawer_restore"
-            android:textSize="@dimen/text_size_default"
-            android:textColor="@color/text_dark"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/drawer_delete"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/drawer_item_height"
-        android:orientation="horizontal"
-        android:layout_below="@+id/drawer_restore"
-        android:background="@drawable/rect_button_background">
-
-        <ImageView
-            android:layout_width="@dimen/icon_small"
-            android:layout_height="@dimen/icon_small"
-            android:alpha="@dimen/icon_alpha"
-            android:layout_marginLeft="16dp"
-            android:layout_marginRight="16dp"
-            android:layout_gravity="center_vertical"
-            android:src="@drawable/ic_action_delete"/>
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="@string/drawer_delete"
-            android:textSize="@dimen/text_size_default"
-            android:textColor="@color/text_dark"
-            android:layout_gravity="center_vertical" />
-    </LinearLayout>
 
     <RelativeLayout
         android:id="@+id/drawer_info"
