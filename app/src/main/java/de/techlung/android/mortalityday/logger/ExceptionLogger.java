@@ -1,7 +1,6 @@
 package de.techlung.android.mortalityday.logger;
 
 import android.app.Activity;
-import android.support.annotation.Nullable;
 import android.util.Log;
 
 import java.io.File;
@@ -11,17 +10,18 @@ import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
-import java.util.Scanner;
 
-import de.techlung.android.mortalityday.thoughts.ThoughtManager;
 
 public class ExceptionLogger implements Thread.UncaughtExceptionHandler{
     private static final String EXCEPTION_LOG_NAME = "mortalityday_exception";
 
-    Activity activity;
+    private Activity activity;
+    private Thread.UncaughtExceptionHandler originalHandler;
 
     public ExceptionLogger(Activity activity) {
         this.activity = activity;
+
+        originalHandler = Thread.getDefaultUncaughtExceptionHandler();
     }
 
     @Override
@@ -65,76 +65,12 @@ public class ExceptionLogger implements Thread.UncaughtExceptionHandler{
         final String errorLogMessage = "Error log written to: " + logFile.getAbsolutePath();
         Log.e(ExceptionLogger.class.getName(), errorLogMessage);
 
-        ThoughtManager.clearLocalThoughtsChangedListeners();
-        ThoughtManager.clearSharedThoughtsChangedListeners();
-
-        System.exit(0);
-    }
-
-    public void handlePastExceptions() {
-        String exception = getExceptionLogs();
-        if (exception != null) {
-            // TODO handle past exception
-            deleteExceptionLogs();
-        }
+        originalHandler.uncaughtException(thread, ex);
     }
 
     public static void createNullpointerExeption () {
         String name = "";
         name = null;
         Log.d(ExceptionLogger.class.getName(), "" + name.length());
-    }
-
-    @Nullable
-    private String getExceptionLogs() {
-        String result = null;
-
-        File trgDir = activity.getExternalFilesDir(null);
-        if (trgDir.exists()) {
-            for (File file : trgDir.listFiles()) {
-                if (file.isFile() && file.canRead() && file.getName().contains(EXCEPTION_LOG_NAME)) {
-                    if (result == null) {
-                        result = "";
-                    }
-
-                    try {
-                        result += readFile(file.getAbsolutePath());
-                        result += "\n\n";
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private void deleteExceptionLogs() {
-        File trgDir = activity.getExternalFilesDir(null);
-        if (trgDir.exists()) {
-            for (File file : trgDir.listFiles()) {
-                if (file.isFile() && file.getName().contains(EXCEPTION_LOG_NAME)) {
-                    file.delete();
-                }
-            }
-        }
-    }
-
-    private String readFile(String pathname) throws IOException {
-
-        File file = new File(pathname);
-        StringBuilder fileContents = new StringBuilder((int)file.length());
-        Scanner scanner = new Scanner(file);
-        String lineSeparator = System.getProperty("line.separator");
-
-        try {
-            while(scanner.hasNextLine()) {
-                fileContents.append(scanner.nextLine() + lineSeparator);
-            }
-            return fileContents.toString();
-        } finally {
-            scanner.close();
-        }
     }
 }

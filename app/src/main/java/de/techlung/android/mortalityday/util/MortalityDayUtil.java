@@ -1,6 +1,5 @@
 package de.techlung.android.mortalityday.util;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -14,9 +13,12 @@ public final class MortalityDayUtil {
 
     }
     public static boolean isMortalityDay(){
+        /*
         Calendar day = new GregorianCalendar();
         day.setTime(new Date());
         return isMortalityDay(day);
+        */
+        return true;
     }
 
     public static boolean isMortalityDay(Calendar day) {
@@ -54,12 +56,6 @@ public final class MortalityDayUtil {
         day.set(Calendar.SECOND,0);
         day.set(Calendar.MILLISECOND, 0);
         return day;
-    }
-
-    public static String getDateFormatted(long time) {
-        Date date = new Date(time);
-        SimpleDateFormat format = new SimpleDateFormat("dd.MM.yyyy");
-        return format.format(date);
     }
 
 }

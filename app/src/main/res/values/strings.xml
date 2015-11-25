@@ -8,51 +8,15 @@
     <string name="alert_thanks">Thanks</string>
     <string name="alert_warning">Warning</string>
 
-    <string name="alert_loading">Loading…</string>
-
-    <string name="warning_restore">This will delete your local thoughts and restore the ones you shared to the cloud.</string>
-    <string name="warning_delete">This will delete your local thoughts.</string>
-
-    <string name="error_no_network">Network Error</string>
-
-    <string name="drawer_delete">Delete Thoughts</string>
-    <string name="drawer_restore">Restore Account</string>
-    <string name="drawer_settings">Settings</string>
-    <string name="drawer_login">Login</string>
-
-    <string name="login_register">Register</string>
-    <string name="login_login">Login</string>
-    <string name="login_username">Username</string>
-    <string name="login_password">Password</string>
-    <string name="login_field_required">Field required</string>
-    <string name="login_password_incorrect">Password incorrect</string>
-
     <string name="first_start_title">Welcome</string>
     <string name="first_start_message">One day you will die. \n\nWhy should you reflect on this fact? Simple. It will serve as the foundation of discovering your personal meaning in life. \n\nWelcome to a community of aware mortals :)</string>
 
-    <string name="cloud_error_title">Cloud Error</string>
-    <string name="cloud_error_message">Please register and login to use cloud functions.</string>
-
-    <string name="info_title">Mortality Day</string>
-    <string name="info_message">Version: #TAG#</string>
-
-    <string name="thoughts">Thought</string>
-    <string name="thoughts_edit_hint">what is your thought?</string>
-    <string-array name="thoughts_categories">
-        <item>Do</item>
-        <item>Don\'t</item>
-    </string-array>
-
-    <string name="gathering_menu_sort_date">Sort by Date</string>
-    <string name="gathering_menu_sort_rating">Sort by Rating</string>
-
-
     <string name="notification_title">My Mortality Day…</string>
     <string-array name="notification_messages">
-        <item>Remind me that I must die, so I grow wise.</item>
-        <item>Don\'t regret growing older. Its a privilege denied to many.</item>
+        <item>\"Remind me that I must die, so I grow wise.\"\n\n -Bible</item>
+        <item>\"Don\'t regret growing older. Its a privilege denied to many.\"\n\n -Unknown</item>
+        <item>\"Live simply so that others may simply live.\"\n\n -Mahatma Gandhi</item>
     </string-array>
-
 
 
 </resources>

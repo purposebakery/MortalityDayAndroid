@@ -5,8 +5,8 @@
 
     <string name="prefs_day_title">Mortality Day</string>
 
-    <string name="prefs_notify">Display Notification</string>
-    <string name="prefs_notify_summary">Notify me when its my mortality day</string>
+    <string name="prefs_notify">Notify me</string>
+    <string name="prefs_notify_summary">Display notification on my mortality day</string>
     <string name="prefs_notify_key">KEY_NOTIFY</string>
 
     <string name="prefs_day_fequency">Frequency</string>
@@ -43,9 +43,5 @@
         <item>7</item>
     </string-array>
 
-    <string name="prefs_share_title">Sharing</string>
-    <string name="prefs_share_automatic">Automatic sharing</string>
-    <string name="prefs_share_automatic_summary">Automatically share your thoughts with the community</string>
-    <string name="prefs_share_automatic_key">KEY_AUTOMATIC_SHARING</string>
 
 </resources>

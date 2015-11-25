@@ -3,11 +3,9 @@ package de.techlung.android.mortalityday.settings;
 import android.content.Context;
 import android.content.ContextWrapper;
 
-import com.orhanobut.hawk.Hawk;
 import com.pixplicity.easyprefs.library.Prefs;
 
 import de.techlung.android.mortalityday.enums.Frequency;
-import de.techlung.android.mortalityday.util.DeviceUtil;
 
 public class Preferences {
     private static final String FIRST_START = "FIRST_START";
@@ -17,7 +15,6 @@ public class Preferences {
     private static final String FREQUENCY = "KEY_FREQENCY";
     private static final String DAY1 = "KEY_DAY1";
     private static final String DAY2 = "KEY_DAY2";
-    private static final String DEVICE_ID = "KEY_DEVICE_ID";
 
     private static final String USER_NAME = "USER_NAME";
     private static final String USER_NAME_DEFAULT = "Anonymous";
@@ -28,13 +25,6 @@ public class Preferences {
 
     private static boolean isInited = false;
 
-    public static String getDeviceId() {
-        return Prefs.getString(DEVICE_ID, null);
-    }
-
-    public static void setDeviceId(String deviceId) {
-        Prefs.putString(DEVICE_ID, deviceId);
-    }
 
     public static boolean isNotifyEnabled() {
         return Prefs.getBoolean(NOTIFY, true);
@@ -52,32 +42,6 @@ public class Preferences {
         return Integer.parseInt(Prefs.getString(DAY2, "5"));
     }
 
-    public static boolean isAutomaticSharing() {
-        return Prefs.getBoolean(KEY_AUTOMATIC_SHARING, false);
-    }
-
-    public static boolean isAdmin() {
-        if (getUserName() != null && getUserName().equals("Oliver")) {
-            return true;
-        }
-        return false;
-    }
-
-    public static void setUserName(String userName) {
-        Hawk.put(USER_NAME, userName);
-    }
-
-    public static String getUserName() {
-        return Hawk.get(USER_NAME, USER_NAME_DEFAULT);
-    }
-
-    public static void setUserPassword(String userPassword) {
-        Hawk.put(USER_PASSWORD, userPassword);
-    }
-
-    public static String getUserPassword() {
-        return Hawk.get(USER_PASSWORD, USER_PASSWORD_DEFAULT);
-    }
 
     public static void setFirstStart(boolean firstStart) {
         Prefs.putBoolean(FIRST_START, firstStart);
@@ -100,9 +64,5 @@ public class Preferences {
                 .setPrefsName(context.getPackageName())
                 .setUseDefaultSharedPreference(true)
                 .build();
-
-        if (Preferences.getDeviceId() == null) {
-            Preferences.setDeviceId(DeviceUtil.getDeviceId(context));
-        }
     }
 }

@@ -1,14 +1,14 @@
 package de.techlung.android.mortalityday.settings;
 
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.os.Bundle;
 
+import de.techlung.android.mortalityday.BaseActivity;
 import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
 
-public class PreferencesActivity extends Activity {
+public class PreferencesActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +21,8 @@ public class PreferencesActivity extends Activity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+
+        MortalityDayNotificationManager.setNextNotification(this);
     }
 
     private void checkFirstStart() {
