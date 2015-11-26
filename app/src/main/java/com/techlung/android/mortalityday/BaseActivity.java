@@ -1,11 +1,11 @@
-package de.techlung.android.mortalityday;
+package com.techlung.android.mortalityday;
 
 import android.annotation.SuppressLint;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 
-import de.techlung.android.mortalityday.logger.ExceptionLogger;
-import de.techlung.android.mortalityday.settings.Preferences;
+import com.techlung.android.mortalityday.logger.ExceptionLogger;
+import com.techlung.android.mortalityday.settings.Preferences;
 
 @SuppressLint("Registered")
 public class BaseActivity extends AppCompatActivity {

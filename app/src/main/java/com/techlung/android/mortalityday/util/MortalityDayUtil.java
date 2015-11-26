@@ -1,14 +1,14 @@
-package de.techlung.android.mortalityday.util;
+package com.techlung.android.mortalityday.util;
 
 import android.content.Context;
+
+import com.techlung.android.mortalityday.R;
+import com.techlung.android.mortalityday.enums.Frequency;
+import com.techlung.android.mortalityday.settings.Preferences;
 
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
-
-import de.techlung.android.mortalityday.R;
-import de.techlung.android.mortalityday.enums.Frequency;
-import de.techlung.android.mortalityday.settings.Preferences;
 
 public final class MortalityDayUtil {
 

@@ -1,4 +1,4 @@
-package de.techlung.android.mortalityday.notification;
+package com.techlung.android.mortalityday.notification;
 
 import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
@@ -7,11 +7,11 @@ import android.content.Intent;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.app.TaskStackBuilder;
 
-import de.techlung.android.mortalityday.MessageActivity;
-import de.techlung.android.mortalityday.R;
-import de.techlung.android.mortalityday.settings.Preferences;
-import de.techlung.android.mortalityday.settings.PreferencesActivity;
-import de.techlung.android.mortalityday.util.MortalityDayUtil;
+import com.techlung.android.mortalityday.MessageActivity;
+import com.techlung.android.mortalityday.R;
+import com.techlung.android.mortalityday.settings.Preferences;
+import com.techlung.android.mortalityday.settings.PreferencesActivity;
+import com.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class NotifyMortalReceiver extends BroadcastReceiver {
 

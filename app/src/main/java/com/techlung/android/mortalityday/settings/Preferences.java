@@ -1,11 +1,11 @@
-package de.techlung.android.mortalityday.settings;
+package com.techlung.android.mortalityday.settings;
 
 import android.content.Context;
 import android.content.ContextWrapper;
 
 import com.pixplicity.easyprefs.library.Prefs;
 
-import de.techlung.android.mortalityday.enums.Frequency;
+import com.techlung.android.mortalityday.enums.Frequency;
 
 public class Preferences {
     private static final String FIRST_START = "FIRST_START";

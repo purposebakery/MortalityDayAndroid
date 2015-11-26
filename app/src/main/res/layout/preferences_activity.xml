@@ -7,6 +7,6 @@
         android:id="@+id/preferences_fragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="de.techlung.android.mortalityday.settings.PreferencesFragment"/>
+        android:name="com.techlung.android.mortalityday.settings.PreferencesFragment"/>
 
 </RelativeLayout>

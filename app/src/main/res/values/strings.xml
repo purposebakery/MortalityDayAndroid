@@ -8,6 +8,8 @@
     <string name="alert_thanks">Thanks</string>
     <string name="alert_warning">Warning</string>
 
+    <string name="alert_share">Share quote</string>
+
     <string name="first_start_title">Remind me that I must die, so I grow wise…</string>
     <string name="first_start_message">Welcome to our little community of aware mortals! \n\nOliver</string>
 
@@ -18,12 +20,28 @@
         <item>Remind me that I must die, so I grow wise.</item>
         <item>Don\'t regret growing older. Its a privilege denied to many.</item>
         <item>Live simply so that others may simply live.</item>
+        <item>Death is something inevitable. When a man has done what he considers to be his duty to his people and his country, he can rest in peace.</item>
+        <item>On the contrary, death is the ultimate fairness; rich and poor, young and old, all are equal in death.</item>
+        <item>The best way to find yourself is to lose yourself in the service of others.</item>
+        <item>Yesterday is history. Tomorrow is a mystery. Today is a gift. That\'s why it\'s called the present.</item>
+        <item>Being sad with the right people is better than being happy with the wrong ones.</item>
+        <item>You have enemies? Good. That means you\'ve stood up for something, sometime in your life.</item>
+        <item>You are only young once, but you can be immature forever.</item>
+        <item>Worrying is like a rocking chair: it gives you something to do, but doesn\'t get you anywhere.</item>
     </string-array>
 
     <string-array name="notification_authors">
         <item>Bible</item>
         <item>Unknown</item>
         <item>Mahatma Gandhi</item>
+        <item>Nelson Mandela</item>
+        <item>Unknown</item>
+        <item>Mahatma Gandhi</item>
+        <item>Unknown</item>
+        <item>Philippos</item>
+        <item>Winston Churchill</item>
+        <item>Hannah Marks</item>
+        <item>Van Wilder</item>
     </string-array>
 
 

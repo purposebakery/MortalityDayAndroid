@@ -1,4 +1,4 @@
-package de.techlung.android.mortalityday.logger;
+package com.techlung.android.mortalityday.logger;
 
 import android.app.Activity;
 import android.util.Log;
@@ -28,6 +28,12 @@ public class ExceptionLogger implements Thread.UncaughtExceptionHandler{
     public void uncaughtException(Thread thread, Throwable ex) {
 
         File trgDir = activity.getExternalFilesDir(null);
+
+        if (trgDir == null) {
+            originalHandler.uncaughtException(thread, ex);
+            return;
+        }
+
         if (!trgDir.exists()) {
             trgDir.mkdirs();
         }

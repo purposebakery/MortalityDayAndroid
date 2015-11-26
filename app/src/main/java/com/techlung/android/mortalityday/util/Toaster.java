@@ -1,4 +1,4 @@
-package de.techlung.android.mortalityday.util;
+package com.techlung.android.mortalityday.util;
 
 import android.content.Context;
 import android.widget.Toast;

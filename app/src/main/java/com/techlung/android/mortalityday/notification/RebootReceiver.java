@@ -1,8 +1,10 @@
-package de.techlung.android.mortalityday.notification;
+package com.techlung.android.mortalityday.notification;
 
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+
+import com.techlung.android.mortalityday.settings.Preferences;
 
 public class RebootReceiver extends BroadcastReceiver {
 
@@ -12,6 +14,8 @@ public class RebootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        MortalityDayNotificationManager.setNextNotification(context, false);
+        Preferences.initPreferences(context);
+
+        MortalityDayNotificationManager.setNextNotification(context, true);
     }
 }

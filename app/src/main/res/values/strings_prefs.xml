@@ -20,9 +20,9 @@
         <item>TWICE_A_WEEK</item>
     </string-array>
 
-    <string name="prefs_day_day1">Primary Day</string>
+    <string name="prefs_day_day1">Primary day</string>
     <string name="prefs_day_day1_key">KEY_DAY1</string>
-    <string name="prefs_day_day2">Secondary Day</string>
+    <string name="prefs_day_day2">Secondary day</string>
     <string name="prefs_day_day2_key">KEY_DAY2</string>
     <string-array name="prefs_day_weekdays_entries">
         <item>Sunday</item>

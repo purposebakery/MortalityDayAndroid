@@ -1,12 +1,12 @@
-package de.techlung.android.mortalityday;
+package com.techlung.android.mortalityday;
 
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-import de.techlung.android.mortalityday.settings.PreferencesActivity;
-import de.techlung.android.mortalityday.util.MortalityDayUtil;
+import com.techlung.android.mortalityday.settings.PreferencesActivity;
+import com.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class MessageActivity extends BaseActivity {
     public static final String MESSAGE_EXTRA = "MESSAGE_EXTRA";
@@ -48,6 +48,19 @@ public class MessageActivity extends BaseActivity {
                 Intent intent = new Intent(MessageActivity.this, PreferencesActivity.class);
                 intent.putExtra(PreferencesActivity.CALLED_INTERNAL, true);
                 startActivity(intent);
+            }
+        });
+
+        final String shareMessage = message + ((author != null && !author.trim().equals("")) ? ("\n - " + author) : "");
+        findViewById(R.id.message_share).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent share = new Intent(Intent.ACTION_SEND);
+                share.setType("text/plain");
+                share.putExtra(Intent.EXTRA_TEXT, shareMessage);
+
+                String chooserMessage = getString(R.string.alert_share);
+                startActivity(Intent.createChooser(share, chooserMessage));
             }
         });
     }

@@ -1,15 +1,15 @@
-package de.techlung.android.mortalityday.settings;
+package com.techlung.android.mortalityday.settings;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 
-import de.techlung.android.mortalityday.BaseActivity;
-import de.techlung.android.mortalityday.MessageActivity;
-import de.techlung.android.mortalityday.R;
-import de.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
-import de.techlung.android.mortalityday.util.MortalityDayUtil;
+import com.techlung.android.mortalityday.BaseActivity;
+import com.techlung.android.mortalityday.MessageActivity;
+import com.techlung.android.mortalityday.R;
+import com.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
+import com.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class PreferencesActivity extends BaseActivity {
     public static final String CALLED_INTERNAL = "CALLED_INTERNAL";

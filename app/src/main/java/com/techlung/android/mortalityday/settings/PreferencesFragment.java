@@ -1,12 +1,12 @@
-package de.techlung.android.mortalityday.settings;
+package com.techlung.android.mortalityday.settings;
 
 import android.os.Bundle;
 import android.preference.ListPreference;
 import android.preference.Preference;
 import android.preference.PreferenceFragment;
 
-import de.techlung.android.mortalityday.R;
-import de.techlung.android.mortalityday.enums.Frequency;
+import com.techlung.android.mortalityday.R;
+import com.techlung.android.mortalityday.enums.Frequency;
 
 public class PreferencesFragment extends PreferenceFragment {
     public static final String TAG = PreferencesFragment.class.getName();
