@@ -27,7 +27,7 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
             showNotification(context);
         }
 
-        MortalityDayNotificationManager.setNextNotification(context);
+        MortalityDayNotificationManager.setNextNotification(context, false);
     }
 
     private void showNotification(Context context) {
@@ -36,17 +36,17 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
             return;
         }
 
-        String[] messages = context.getResources().getStringArray(R.array.notification_messages);
-        String message = messages[(int) (Math.random() * (messages.length))];
+        MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.getQuote(context);
 
         NotificationCompat.Builder mBuilder =
                 new NotificationCompat.Builder(context)
                         .setSmallIcon(R.drawable.logo)
                         .setContentTitle(context.getString(R.string.notification_title))
-                        .setContentText(message);
+                        .setContentText(quote.message);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, MessageActivity.class);
-        resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, message);
+        resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, quote.message);
+        resultIntent.putExtra(MessageActivity.AUTHOR_EXTRA, quote.author);
 
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
@@ -63,7 +63,6 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
                         0,
                         PendingIntent.FLAG_UPDATE_CURRENT
                 );
-        resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, message);
         mBuilder.setContentIntent(resultPendingIntent);
         android.app.NotificationManager mNotificationManager =
                 (android.app.NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);

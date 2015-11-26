@@ -2,18 +2,27 @@ package de.techlung.android.mortalityday.settings;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import de.techlung.android.mortalityday.BaseActivity;
+import de.techlung.android.mortalityday.MessageActivity;
 import de.techlung.android.mortalityday.R;
 import de.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
+import de.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class PreferencesActivity extends BaseActivity {
+    public static final String CALLED_INTERNAL = "CALLED_INTERNAL";
+
+    boolean skipped = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.preferences_activity);
+
+        skipped = false;
 
         checkFirstStart();
     }
@@ -22,7 +31,9 @@ public class PreferencesActivity extends BaseActivity {
     protected void onDestroy() {
         super.onDestroy();
 
-        MortalityDayNotificationManager.setNextNotification(this);
+        if (!skipped) {
+            MortalityDayNotificationManager.setNextNotification(this, true);
+        }
     }
 
     private void checkFirstStart() {
@@ -30,6 +41,10 @@ public class PreferencesActivity extends BaseActivity {
             Preferences.setFirstStart(false);
 
             showFirstStartMessage();
+        } else if (MortalityDayUtil.isMortalityDay() && !getIntent().getBooleanExtra(CALLED_INTERNAL, false)) {
+            skipped = true;
+            Intent messageStart = new Intent(this, MessageActivity.class);
+            startActivity(messageStart);
         }
     }
 

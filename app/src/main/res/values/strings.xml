@@ -8,14 +8,22 @@
     <string name="alert_thanks">Thanks</string>
     <string name="alert_warning">Warning</string>
 
-    <string name="first_start_title">Welcome</string>
-    <string name="first_start_message">One day you will die. \n\nWhy should you reflect on this fact? Simple. It will serve as the foundation of discovering your personal meaning in life. \n\nWelcome to a community of aware mortals :)</string>
+    <string name="first_start_title">Remind me that I must die, so I grow wise…</string>
+    <string name="first_start_message">Welcome to our little community of aware mortals! \n\nOliver</string>
+
+    <string name="next_day">Next Mortality Day</string>
 
     <string name="notification_title">My Mortality Day…</string>
     <string-array name="notification_messages">
-        <item>\"Remind me that I must die, so I grow wise.\"\n\n -Bible</item>
-        <item>\"Don\'t regret growing older. Its a privilege denied to many.\"\n\n -Unknown</item>
-        <item>\"Live simply so that others may simply live.\"\n\n -Mahatma Gandhi</item>
+        <item>Remind me that I must die, so I grow wise.</item>
+        <item>Don\'t regret growing older. Its a privilege denied to many.</item>
+        <item>Live simply so that others may simply live.</item>
+    </string-array>
+
+    <string-array name="notification_authors">
+        <item>Bible</item>
+        <item>Unknown</item>
+        <item>Mahatma Gandhi</item>
     </string-array>
 
 
