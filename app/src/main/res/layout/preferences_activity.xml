@@ -3,10 +3,24 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <Button
+        android:id="@+id/showQuote"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="16dp"
+        android:text="@string/settings_show_quote" />
+
+
     <fragment
         android:id="@+id/preferences_fragment"
+        android:name="com.techlung.android.mortalityday.settings.PreferencesFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:name="com.techlung.android.mortalityday.settings.PreferencesFragment"/>
+        android:layout_above="@+id/showQuote" />
+
 
 </RelativeLayout>

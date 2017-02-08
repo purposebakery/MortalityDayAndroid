@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import com.techlung.android.mortalityday.BaseActivity;
 import com.techlung.android.mortalityday.MessageActivity;
@@ -21,6 +22,17 @@ public class PreferencesActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.preferences_activity);
+
+        findViewById(R.id.showQuote).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.getQuote(PreferencesActivity.this);
+                Intent resultIntent = new Intent(PreferencesActivity.this, MessageActivity.class);
+                resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, quote.message);
+                resultIntent.putExtra(MessageActivity.AUTHOR_EXTRA, quote.author);
+                startActivity(resultIntent);
+            }
+        });
 
         skipped = false;
 

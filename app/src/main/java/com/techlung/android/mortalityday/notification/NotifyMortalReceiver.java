@@ -69,7 +69,7 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
 // mId allows you to update the notification later on.
 
 
-        mNotificationManager.notify(1000,  mBuilder.build());
+        mNotificationManager.notify(1000, mBuilder.build());
     }
 
 }

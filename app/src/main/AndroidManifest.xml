@@ -2,9 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.techlung.android.mortalityday">
 
-    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
-    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +23,7 @@
 
         <receiver
             android:name=".notification.NotifyMortalReceiver"
-            android:enabled="true"></receiver>
+            android:enabled="true"/>
         <receiver
             android:name=".notification.RebootReceiver"
             android:enabled="true">

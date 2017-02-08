@@ -4,7 +4,6 @@ import android.content.Context;
 import android.content.ContextWrapper;
 
 import com.pixplicity.easyprefs.library.Prefs;
-
 import com.techlung.android.mortalityday.enums.Frequency;
 
 public class Preferences {
@@ -42,13 +41,12 @@ public class Preferences {
         return Integer.parseInt(Prefs.getString(DAY2, "5"));
     }
 
+    public static boolean getFirstStart() {
+        return Prefs.getBoolean(FIRST_START, true);
+    }
 
     public static void setFirstStart(boolean firstStart) {
         Prefs.putBoolean(FIRST_START, firstStart);
-    }
-
-    public static boolean getFirstStart() {
-        return Prefs.getBoolean(FIRST_START, true);
     }
 
     public static void initPreferences(Context context) {

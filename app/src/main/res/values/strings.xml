@@ -15,6 +15,8 @@
 
     <string name="next_day">Next Mortality Day</string>
 
+    <string name="settings_show_quote">Show Quote</string>
+
     <string name="notification_title">My Mortality Day…</string>
     <string-array name="notification_messages">
         <item>Remind me that I must die, so I grow wise.</item>
@@ -28,6 +30,10 @@
         <item>You have enemies? Good. That means you\'ve stood up for something, sometime in your life.</item>
         <item>You are only young once, but you can be immature forever.</item>
         <item>Worrying is like a rocking chair: it gives you something to do, but doesn\'t get you anywhere.</item>
+        <item>When another person makes you suffer, it is because he suffers deeply within himself, and his suffering is spilling over. He does not need punishment; he needs help.</item>
+        <item>Don\'t fear failure. - Not failure, but low aim, is the crime. In great attempts it is glorious even to fail.</item>
+        <item>Not all of us can do great things. But we can do small things with great love.</item>
+        <item>Be yourself; everyone else is already taken.</item>
     </string-array>
 
     <string-array name="notification_authors">
@@ -42,6 +48,10 @@
         <item>Winston Churchill</item>
         <item>Hannah Marks</item>
         <item>Van Wilder</item>
+        <item>Thich Naht Hanh</item>
+        <item>Bruce Lee</item>
+        <item>Mother Teresa</item>
+        <item>Oscar Wilde</item>
     </string-array>
 
 

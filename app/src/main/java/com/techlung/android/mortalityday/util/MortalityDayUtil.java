@@ -15,7 +15,8 @@ public final class MortalityDayUtil {
     private MortalityDayUtil() {
 
     }
-    public static boolean isMortalityDay(){
+
+    public static boolean isMortalityDay() {
         Calendar day = new GregorianCalendar();
         day.setTime(new Date());
         return isMortalityDay(day);
@@ -39,6 +40,7 @@ public final class MortalityDayUtil {
 
     /**
      * Get next mortality day. skip current day if today is a mortality day.
+     *
      * @return
      */
     public static Calendar getNextMortalityDay() {
@@ -52,8 +54,8 @@ public final class MortalityDayUtil {
         }
 
         day.set(Calendar.HOUR_OF_DAY, 0);
-        day.set(Calendar.MINUTE,0);
-        day.set(Calendar.SECOND,0);
+        day.set(Calendar.MINUTE, 0);
+        day.set(Calendar.SECOND, 0);
         day.set(Calendar.MILLISECOND, 0);
         return day;
     }
