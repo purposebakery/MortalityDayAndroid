@@ -14,10 +14,12 @@
     <string-array name="prefs_day_fequency_entries">
         <item>once a week</item>
         <item>twice a week</item>
+        <item>every day</item>
     </string-array>
     <string-array name="prefs_day_fequency_values">
         <item>ONCE_A_WEEK</item>
         <item>TWICE_A_WEEK</item>
+        <item>EVERY_DAY</item>
     </string-array>
 
     <string name="prefs_day_day1">Primary day</string>

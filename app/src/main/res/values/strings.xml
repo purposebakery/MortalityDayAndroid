@@ -34,6 +34,16 @@
         <item>Don\'t fear failure. - Not failure, but low aim, is the crime. In great attempts it is glorious even to fail.</item>
         <item>Not all of us can do great things. But we can do small things with great love.</item>
         <item>Be yourself; everyone else is already taken.</item>
+        <item>Evil prevails when good men fail to act.</item>
+        <item>It is not death that a man should fear, but he should fear never beginning to live.</item>
+        <item>Even death is not to be feared by one who has lived wisely.</item>
+        <item>If a man has not discovered something that he will die for he isn't fit to live.</item>
+        <item>All you have to decide is what to do with the time that is given to you.</item>
+        <item>Many that live deserve death. Some that die deserve life. Do not be too eager to deal out death in judgement. Even the very wise cannot see all ends.</item>
+        <item>Change your life today. Don't gamble on the future, act now, without delay.</item>
+        <item>Life is like riding a bicycle. To keep your balance, you must keep moving.</item>
+        <item>Do not take life too seriously. You will never get out of it alive.</item>
+
     </string-array>
 
     <string-array name="notification_authors">
@@ -52,6 +62,15 @@
         <item>Bruce Lee</item>
         <item>Mother Teresa</item>
         <item>Oscar Wilde</item>
+        <item>Edmund Burke</item>
+        <item>Marcus Aurelius</item>
+        <item>Buddha</item>
+        <item>Martin Luther King, Jr.</item>
+        <item>Gandalf</item>
+        <item>Gandalf</item>
+        <item>Simone de Beauvoir</item>
+        <item>Albert Einstein</item>
+        <item>Elbert Hubbard</item>
     </string-array>
 
 

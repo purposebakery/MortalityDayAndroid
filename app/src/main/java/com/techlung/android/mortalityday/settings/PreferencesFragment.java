@@ -39,9 +39,14 @@ public class PreferencesFragment extends PreferenceFragment {
 
     private void updateDayVisibility(Frequency newFrequency) {
         if (newFrequency == Frequency.ONCE_A_WEEK) {
+            day1Preference.setEnabled(true);
             day2Preference.setEnabled(false);
-        } else {
+        } else if (newFrequency == Frequency.TWICE_A_WEEK) {
+            day1Preference.setEnabled(true);
             day2Preference.setEnabled(true);
+        } else {
+            day1Preference.setEnabled(false);
+            day2Preference.setEnabled(false);
         }
     }
 }
