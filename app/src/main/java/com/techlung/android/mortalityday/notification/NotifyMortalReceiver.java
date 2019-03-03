@@ -59,6 +59,7 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
                         .setSmallIcon(R.mipmap.ic_launcher)
                         .setColor(ContextCompat.getColor(context, R.color.colorAccent))
                         .setContentTitle(context.getString(R.string.notification_title))
+                        .setAutoCancel(true)
                         .setContentText(quote.message);
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, MessageActivity.class);

@@ -27,14 +27,11 @@ public class PreferencesActivity extends BaseActivity {
         findViewById(R.id.showQuote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                NotifyMortalReceiver.showNotification(PreferencesActivity.this);
-                // TODO comment back in
-                /*
                 MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.getQuote(PreferencesActivity.this);
                 Intent resultIntent = new Intent(PreferencesActivity.this, MessageActivity.class);
                 resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, quote.message);
                 resultIntent.putExtra(MessageActivity.AUTHOR_EXTRA, quote.author);
-                startActivity(resultIntent);*/
+                startActivity(resultIntent);
             }
         });
 
