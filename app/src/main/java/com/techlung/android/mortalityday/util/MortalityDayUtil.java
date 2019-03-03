@@ -22,26 +22,21 @@ public final class MortalityDayUtil {
         return isMortalityDay(day);
     }
 
-    public static boolean isMortalityDay(Calendar day) {
+    private static boolean isMortalityDay(Calendar day) {
         int weekDay = day.get(Calendar.DAY_OF_WEEK);
 
         if (Preferences.getFrequency() == Frequency.ONCE_A_WEEK) {
-            if (weekDay == Preferences.getDay1()) {
-                return true;
-            }
+            return weekDay == Preferences.getDay1();
+        } else if (Preferences.getFrequency() == Frequency.TWICE_A_WEEK) {
+            return weekDay == Preferences.getDay1() || weekDay == Preferences.getDay2();
         } else {
-            if (weekDay == Preferences.getDay1() || weekDay == Preferences.getDay2()) {
-                return true;
-            }
+            return true;
         }
 
-        return false;
     }
 
     /**
      * Get next mortality day. skip current day if today is a mortality day.
-     *
-     * @return
      */
     public static Calendar getNextMortalityDay() {
         Calendar day = new GregorianCalendar();
@@ -49,8 +44,10 @@ public final class MortalityDayUtil {
 
         day.add(Calendar.MINUTE, 1440); // add one Day
 
-        while (!isMortalityDay(day)) {
-            day.add(Calendar.MINUTE, 1440); // add one Day
+        if (Preferences.getFrequency() != Frequency.EVERY_DAY) {
+            while (!isMortalityDay(day)) {
+                day.add(Calendar.MINUTE, 1440); // add one Day
+            }
         }
 
         day.set(Calendar.HOUR_OF_DAY, 0);

@@ -10,6 +10,7 @@ import com.techlung.android.mortalityday.BaseActivity;
 import com.techlung.android.mortalityday.MessageActivity;
 import com.techlung.android.mortalityday.R;
 import com.techlung.android.mortalityday.notification.MortalityDayNotificationManager;
+import com.techlung.android.mortalityday.notification.NotifyMortalReceiver;
 import com.techlung.android.mortalityday.util.MortalityDayUtil;
 
 public class PreferencesActivity extends BaseActivity {
@@ -26,11 +27,21 @@ public class PreferencesActivity extends BaseActivity {
         findViewById(R.id.showQuote).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                NotifyMortalReceiver.showNotification(PreferencesActivity.this);
+                // TODO comment back in
+                /*
                 MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.getQuote(PreferencesActivity.this);
                 Intent resultIntent = new Intent(PreferencesActivity.this, MessageActivity.class);
                 resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, quote.message);
                 resultIntent.putExtra(MessageActivity.AUTHOR_EXTRA, quote.author);
-                startActivity(resultIntent);
+                startActivity(resultIntent);*/
+            }
+        });
+
+        findViewById(R.id.info).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                new AlertDialog.Builder(PreferencesActivity.this).setTitle(R.string.alert_info).setMessage(R.string.info_message).setPositiveButton(R.string.alert_ok, null).show();
             }
         });
 
@@ -40,8 +51,8 @@ public class PreferencesActivity extends BaseActivity {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
+    protected void onStop() {
+        super.onStop();
 
         if (!skipped) {
             MortalityDayNotificationManager.setNextNotification(this, true);

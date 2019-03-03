@@ -7,6 +7,9 @@
     <string name="alert_delete">Delete</string>
     <string name="alert_thanks">Thanks</string>
     <string name="alert_warning">Warning</string>
+    <string name="alert_info">Info</string>
+
+    <string name="info_message">This app is open source (https://github.com/purposebakery/MortalityDayAndroid). Feel free to submit feedback / comments / quotes via the issues tab. \n\nLauncher icon made by Freepik from www.flaticon.com is licensed by CC 3.0 BY</string>
 
     <string name="alert_share">Share quote</string>
 
@@ -37,10 +40,10 @@
         <item>Evil prevails when good men fail to act.</item>
         <item>It is not death that a man should fear, but he should fear never beginning to live.</item>
         <item>Even death is not to be feared by one who has lived wisely.</item>
-        <item>If a man has not discovered something that he will die for he isn't fit to live.</item>
+        <item>If a man has not discovered something that he will die for he isn\'t fit to live.</item>
         <item>All you have to decide is what to do with the time that is given to you.</item>
         <item>Many that live deserve death. Some that die deserve life. Do not be too eager to deal out death in judgement. Even the very wise cannot see all ends.</item>
-        <item>Change your life today. Don't gamble on the future, act now, without delay.</item>
+        <item>Change your life today. Don\'t gamble on the future, act now, without delay.</item>
         <item>Life is like riding a bicycle. To keep your balance, you must keep moving.</item>
         <item>Do not take life too seriously. You will never get out of it alive.</item>
 
