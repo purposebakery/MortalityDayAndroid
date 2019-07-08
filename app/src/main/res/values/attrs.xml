@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <attr name="themedIconToday" format="reference" />
+    <attr name="themedIconShare" format="reference" />
+    <attr name="themedIconSettings" format="reference" />
+    <attr name="themedIconNotification" format="reference" />
+</resources>

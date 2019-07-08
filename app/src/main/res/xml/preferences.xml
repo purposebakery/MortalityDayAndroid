@@ -5,7 +5,7 @@
 
         <CheckBoxPreference
             android:defaultValue="true"
-            android:icon="@drawable/ic_notifications_black_24dp"
+            android:icon="?attr/themedIconNotification"
             android:key="@string/prefs_notify_key"
             android:summary="@string/prefs_notify_summary"
             android:title="@string/prefs_notify" />
@@ -14,7 +14,7 @@
             android:defaultValue="ONCE_A_WEEK"
             android:entries="@array/prefs_day_fequency_entries"
             android:entryValues="@array/prefs_day_fequency_values"
-            android:icon="@drawable/ic_today_black_24dp"
+            android:icon="?attr/themedIconToday"
             android:key="@string/prefs_day_fequency_key"
             android:summary="%s"
             android:title="@string/prefs_day_fequency" />
@@ -35,6 +35,14 @@
             android:summary="%s"
             android:title="@string/prefs_day_day2" />
 
+
+        <ListPreference
+            android:defaultValue="LIGHT"
+            android:entries="@array/prefs_theme_entries"
+            android:entryValues="@array/prefs_theme_values"
+            android:key="@string/prefs_theme_key"
+            android:summary="%s"
+            android:title="@string/prefs_theme" />
 
     </PreferenceCategory>
 

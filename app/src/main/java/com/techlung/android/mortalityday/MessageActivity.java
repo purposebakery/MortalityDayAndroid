@@ -5,10 +5,13 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.techlung.android.mortalityday.settings.Preferences;
 import com.techlung.android.mortalityday.settings.PreferencesActivity;
 import com.techlung.android.mortalityday.util.MortalityDayUtil;
 
-public class MessageActivity extends BaseActivity {
+public class MessageActivity extends AppCompatActivity {
     public static final String MESSAGE_EXTRA = "MESSAGE_EXTRA";
     public static final String AUTHOR_EXTRA = "AUTHOR_EXTRA";
 
@@ -18,6 +21,9 @@ public class MessageActivity extends BaseActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Preferences.initPreferences(this);
+
         setContentView(R.layout.message_activity);
 
         String message = getIntent().getStringExtra(MESSAGE_EXTRA);
@@ -46,7 +52,6 @@ public class MessageActivity extends BaseActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(MessageActivity.this, PreferencesActivity.class);
-                intent.putExtra(PreferencesActivity.CALLED_INTERNAL, true);
                 startActivity(intent);
             }
         });

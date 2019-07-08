@@ -14,6 +14,7 @@ public class PreferencesFragment extends PreferenceFragment {
     ListPreference frequencyPreference;
     ListPreference day1Preference;
     ListPreference day2Preference;
+    ListPreference themePreference;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -25,6 +26,7 @@ public class PreferencesFragment extends PreferenceFragment {
         frequencyPreference = (ListPreference) findPreference(getString(R.string.prefs_day_fequency_key));
         day1Preference = (ListPreference) findPreference(getString(R.string.prefs_day_day1_key));
         day2Preference = (ListPreference) findPreference(getString(R.string.prefs_day_day2_key));
+        themePreference = (ListPreference) findPreference(getString(R.string.prefs_theme_key));
 
         frequencyPreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
             @Override
@@ -34,7 +36,16 @@ public class PreferencesFragment extends PreferenceFragment {
             }
         });
 
+        themePreference.setOnPreferenceChangeListener(new Preference.OnPreferenceChangeListener() {
+            @Override
+            public boolean onPreferenceChange(Preference preference, Object newValue) {
+                ((PreferencesActivity) getActivity()).updateTheme();
+                return true;
+            }
+        });
+
         updateDayVisibility(Frequency.valueOf(frequencyPreference.getValue()));
+
     }
 
     private void updateDayVisibility(Frequency newFrequency) {

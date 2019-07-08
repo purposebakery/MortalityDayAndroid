@@ -5,11 +5,13 @@ import android.content.ContextWrapper;
 
 import com.pixplicity.easyprefs.library.Prefs;
 import com.techlung.android.mortalityday.enums.Frequency;
+import com.techlung.android.mortalityday.enums.Theme;
 
 public class Preferences {
     private static final String FIRST_START = "FIRST_START";
 
     private static final String NOTIFY = "KEY_NOTIFY";
+    private static final String THEME = "KEY_THEME";
 
     private static final String FREQUENCY = "KEY_FREQENCY";
     private static final String DAY1 = "KEY_DAY1";
@@ -31,6 +33,10 @@ public class Preferences {
 
     public static Frequency getFrequency() {
         return Frequency.valueOf(Prefs.getString(FREQUENCY, Frequency.ONCE_A_WEEK.name()));
+    }
+
+    public static Theme getTheme() {
+        return Theme.valueOf(Prefs.getString(THEME, Theme.LIGHT.name()));
     }
 
     public static int getDay1() {

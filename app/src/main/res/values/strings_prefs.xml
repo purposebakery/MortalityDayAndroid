@@ -2,8 +2,18 @@
 <resources>
     <string name="prefs_title">Settings</string>
 
-
     <string name="prefs_day_title">Mortality Day</string>
+
+    <string name="prefs_theme">Theme</string>
+    <string name="prefs_theme_key">KEY_THEME</string>
+    <string-array name="prefs_theme_entries">
+        <item>Light</item>
+        <item>Dark</item>
+    </string-array>
+    <string-array name="prefs_theme_values">
+        <item>LIGHT</item>
+        <item>DARK</item>
+    </string-array>
 
     <string name="prefs_notify">Notify me</string>
     <string name="prefs_notify_summary">Display notification on my mortality day</string>

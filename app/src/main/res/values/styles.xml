@@ -4,6 +4,38 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
+        <item name="android:textColorPrimaryNoDisable">@color/colorAccent</item>
+        <item name="android:textColorPrimaryDisableOnly">@color/colorAccent</item>
+        <item name="android:textColorPrimaryInverseDisableOnly">@color/colorAccent</item>
+        <item name="android:textColorPrimaryInverseNoDisable">@color/colorAccent</item>
+        <item name="android:textColorSecondary">@color/textColorSecondary</item>
+        <item name="android:textColorSecondaryInverse">@color/colorAccent</item>
+        <item name="android:textColorSecondaryNoDisable">@color/colorAccent</item>
+        <item name="android:textColorSecondaryInverseNoDisable">@color/colorAccent</item>
+        <item name="android:textColor">@color/colorAccent</item>
+
+        <item name="themedIconNotification">@drawable/ic_notifications_black_24dp</item>
+        <item name="themedIconShare">@drawable/ic_share_black_24dp</item>
+        <item name="themedIconSettings">@drawable/ic_settings_black_24dp</item>
+        <item name="themedIconToday">@drawable/ic_today_black_24dp</item>
     </style>
 
+    <style name="AppTheme.Dark" parent="Theme.AppCompat">
+        <item name="colorPrimary">@color/colorPrimaryInverse</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
+        <item name="colorAccent">@color/colorAccent</item>
+
+        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
+        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
+        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
+        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
+
+        <item name="themedIconNotification">@drawable/ic_notifications_white_24dp</item>
+        <item name="themedIconShare">@drawable/ic_share_white_24dp</item>
+        <item name="themedIconSettings">@drawable/ic_settings_white_24dp</item>
+        <item name="themedIconToday">@drawable/ic_today_white_24dp</item>
+    </style>
 </resources>

@@ -46,7 +46,7 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
             return;
         }
 
-        NotificationManager mNotificationManager = getManager(context);
+        NotificationManager notificationManager = getManager(context);
 
         MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.getQuote(context);
 
@@ -85,7 +85,7 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
 
 
 
-        mNotificationManager.notify(1000, mBuilder.build());
+        notificationManager.notify(1000, mBuilder.build());
     }
 
     @RequiresApi(api = Build.VERSION_CODES.O)
@@ -97,7 +97,6 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
         channel.setLockscreenVisibility(Notification.VISIBILITY_PUBLIC);
 
         getManager(context).createNotificationChannel(channel);
-
     }
 
     private static NotificationManager getManager(Context context) {
