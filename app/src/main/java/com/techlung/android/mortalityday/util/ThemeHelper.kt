@@ -8,8 +8,6 @@ object ThemeHelper {
         when (Preferences.theme) {
             Theme.LIGHT -> executeLight.invoke()
             Theme.DARK -> executeDark.invoke()
-            else -> {
-            }
         }
     }
 }
