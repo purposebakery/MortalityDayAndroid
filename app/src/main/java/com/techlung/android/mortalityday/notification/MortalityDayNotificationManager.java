@@ -20,7 +20,7 @@ import java.util.Locale;
 public class MortalityDayNotificationManager {
 
     public static void setNextNotification(Context context, boolean showToast) {
-        if (!Preferences.isNotifyEnabled()) {
+        if (!Preferences.INSTANCE.isNotifyEnabled()) {
             return;
         }
 
@@ -40,11 +40,11 @@ public class MortalityDayNotificationManager {
         Date date = new Date();
         date.setTime(time);
 
-        Toaster.show(context.getString(R.string.next_day) + "\n" + format.format(date), context);
+        Toaster.INSTANCE.show(context.getString(R.string.next_day) + "\n" + format.format(date), context);
     }
 
     private static long getNextNotificationTime() {
-        Calendar day = MortalityDayUtil.getNextMortalityDay();
+        Calendar day = MortalityDayUtil.INSTANCE.getNextMortalityDay();
         return day.getTimeInMillis();
         //return (new Date()).getTime() + 1000*60*2;
     }

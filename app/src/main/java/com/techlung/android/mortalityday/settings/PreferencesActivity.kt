@@ -2,7 +2,6 @@ package com.techlung.android.mortalityday.settings
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.View
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import com.techlung.android.mortalityday.MessageActivity
@@ -10,7 +9,6 @@ import com.techlung.android.mortalityday.R
 import com.techlung.android.mortalityday.enums.Theme
 import com.techlung.android.mortalityday.notification.MortalityDayNotificationManager
 import com.techlung.android.mortalityday.util.MortalityDayUtil
-
 import kotlinx.android.synthetic.main.preferences_activity.*
 
 class PreferencesActivity : AppCompatActivity() {
@@ -18,7 +16,7 @@ class PreferencesActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         Preferences.initPreferences(this)
-        if (Preferences.getTheme() === Theme.DARK) {
+        if (Preferences.theme === Theme.DARK) {
             setTheme(R.style.AppTheme_Dark)
         }
         super.onCreate(savedInstanceState)
@@ -62,10 +60,10 @@ class PreferencesActivity : AppCompatActivity() {
     }
 
     private fun checkFirstStart() {
-        if (Preferences.getFirstStart()) {
-            Preferences.setFirstStart(false)
+        if (Preferences.firstStart) {
+            Preferences.firstStart = false
             showFirstStartMessage()
-        } else if (MortalityDayUtil.isMortalityDay() && !intent.getBooleanExtra(CALLED_INTERNAL, false)) {
+        } else if (MortalityDayUtil.isMortalityDay && !intent.getBooleanExtra(CALLED_INTERNAL, false)) {
             skipped = true
             val messageStart = Intent(this, MessageActivity::class.java)
             startActivity(messageStart)

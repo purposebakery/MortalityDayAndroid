@@ -4,6 +4,8 @@
 
     <string name="prefs_day_title">Mortality Day</string>
 
+    <string name="prefs_interface_title">Interface</string>
+
     <string name="prefs_theme">Theme</string>
     <string name="prefs_theme_key">KEY_THEME</string>
     <string-array name="prefs_theme_entries">

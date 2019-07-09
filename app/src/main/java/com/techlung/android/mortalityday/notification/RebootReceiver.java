@@ -14,7 +14,7 @@ public class RebootReceiver extends BroadcastReceiver {
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        Preferences.initPreferences(context);
+        Preferences.INSTANCE.initPreferences(context);
 
         MortalityDayNotificationManager.setNextNotification(context, true);
     }

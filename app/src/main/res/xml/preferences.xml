@@ -34,8 +34,9 @@
             android:key="@string/prefs_day_day2_key"
             android:summary="%s"
             android:title="@string/prefs_day_day2" />
+    </PreferenceCategory>
 
-
+    <PreferenceCategory android:title="@string/prefs_interface_title">
         <ListPreference
             android:defaultValue="LIGHT"
             android:entries="@array/prefs_theme_entries"
@@ -45,6 +46,5 @@
             android:title="@string/prefs_theme" />
 
     </PreferenceCategory>
-
 
 </PreferenceScreen>

@@ -29,26 +29,15 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
 
     }
 
-    @Override
-    public void onReceive(final Context context, Intent intent) {
-        Preferences.initPreferences(context);
-
-        if (MortalityDayUtil.isMortalityDay()) {
-            showNotification(context);
-        }
-
-        MortalityDayNotificationManager.setNextNotification(context, false);
-    }
-
     public static void showNotification(Context context) {
 
-        if (!Preferences.isNotifyEnabled()) {
+        if (!Preferences.INSTANCE.isNotifyEnabled()) {
             return;
         }
 
         NotificationManager notificationManager = getManager(context);
 
-        MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.getQuote(context);
+        MortalityDayUtil.MortalityDayQuote quote = MortalityDayUtil.INSTANCE.getQuote(context);
 
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             createChannel(context);
@@ -60,11 +49,11 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
                         .setColor(ContextCompat.getColor(context, R.color.colorAccent))
                         .setContentTitle(context.getString(R.string.notification_title))
                         .setAutoCancel(true)
-                        .setContentText(quote.message);
+                        .setContentText(quote.getMessage());
 // Creates an explicit intent for an Activity in your app
         Intent resultIntent = new Intent(context, MessageActivity.class);
-        resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, quote.message);
-        resultIntent.putExtra(MessageActivity.AUTHOR_EXTRA, quote.author);
+        resultIntent.putExtra(MessageActivity.MESSAGE_EXTRA, quote.getMessage());
+        resultIntent.putExtra(MessageActivity.AUTHOR_EXTRA, quote.getAuthor());
 
 // The stack builder object will contain an artificial back stack for the
 // started Activity.
@@ -83,8 +72,6 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
                 );
         mBuilder.setContentIntent(resultPendingIntent);
 
-
-
         notificationManager.notify(1000, mBuilder.build());
     }
 
@@ -101,6 +88,17 @@ public class NotifyMortalReceiver extends BroadcastReceiver {
 
     private static NotificationManager getManager(Context context) {
         return (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
+    }
+
+    @Override
+    public void onReceive(final Context context, Intent intent) {
+        Preferences.INSTANCE.initPreferences(context);
+
+        if (MortalityDayUtil.INSTANCE.isMortalityDay()) {
+            showNotification(context);
+        }
+
+        MortalityDayNotificationManager.setNextNotification(context, false);
     }
 
 }
