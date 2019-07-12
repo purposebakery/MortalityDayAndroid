@@ -5,17 +5,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorPrimaryNoDisable">@color/colorAccent</item>
-        <item name="android:textColorPrimaryDisableOnly">@color/colorAccent</item>
-        <item name="android:textColorPrimaryInverseDisableOnly">@color/colorAccent</item>
-        <item name="android:textColorPrimaryInverseNoDisable">@color/colorAccent</item>
-        <item name="android:textColorSecondary">@color/textColorSecondary</item>
-        <item name="android:textColorSecondaryInverse">@color/colorAccent</item>
-        <item name="android:textColorSecondaryNoDisable">@color/colorAccent</item>
-        <item name="android:textColorSecondaryInverseNoDisable">@color/colorAccent</item>
-        <item name="android:textColor">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/text_color_primary</item>
+        <item name="android:textColorPrimaryInverse">@color/text_color_primary_inverse</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary</item>
+        <item name="android:textColorSecondaryInverse">@color/text_color_secondary_inverse</item>
+
+        <item name="textColorPrimary">@color/text_color_primary</item>
+        <item name="backgroundColorPrimary">@color/background_light</item>
 
         <item name="themedIconNotification">@drawable/ic_notifications_black_24dp</item>
         <item name="themedIconShare">@drawable/ic_share_black_24dp</item>
@@ -28,10 +24,13 @@
         <item name="colorPrimaryDark">@color/colorPrimaryDarkInverse</item>
         <item name="colorAccent">@color/colorAccent</item>
 
-        <item name="android:textColorPrimary">@color/textColorPrimaryInverse</item>
-        <item name="android:textColorSecondary">@color/textColorSecondaryInverse</item>
-        <item name="android:textColorPrimaryInverse">@color/textColorPrimary</item>
-        <item name="android:textColorSecondaryInverse">@color/textColorSecondary</item>
+        <item name="textColorPrimary">@color/text_color_primary_inverse</item>
+        <item name="backgroundColorPrimary">@color/background_dark</item>
+
+        <item name="android:textColorPrimary">@color/text_color_primary_inverse</item>
+        <item name="android:textColorPrimaryInverse">@color/text_color_primary</item>
+        <item name="android:textColorSecondary">@color/text_color_secondary_inverse</item>
+        <item name="android:textColorSecondaryInverse">@color/text_color_secondary</item>
 
         <item name="themedIconNotification">@drawable/ic_notifications_white_24dp</item>
         <item name="themedIconShare">@drawable/ic_share_white_24dp</item>

@@ -67,6 +67,7 @@ class PreferencesActivity : AppCompatActivity() {
             skipped = true
             val messageStart = Intent(this, MessageActivity::class.java)
             startActivity(messageStart)
+            finish()
         }
     }
 

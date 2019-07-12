@@ -7,6 +7,7 @@ import androidx.preference.PreferenceFragmentCompat
 
 import com.techlung.android.mortalityday.R
 import com.techlung.android.mortalityday.enums.Frequency
+import com.techlung.android.mortalityday.enums.Theme
 
 class PreferencesFragment : PreferenceFragmentCompat() {
 
@@ -17,13 +18,6 @@ class PreferencesFragment : PreferenceFragmentCompat() {
 
     override fun onCreatePreferences(savedInstanceState: Bundle?, rootKey: String?) {
         setPreferencesFromResource(R.xml.preferences, rootKey)
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        // Load the preferences from an XML resource
-        addPreferencesFromResource(R.xml.preferences)
 
         frequencyPreference = findPreference<ListPreference>(getString(R.string.prefs_day_fequency_key))
         day1Preference = findPreference<ListPreference>(getString(R.string.prefs_day_day1_key))
@@ -35,8 +29,12 @@ class PreferencesFragment : PreferenceFragmentCompat() {
             true
         }
 
-        themePreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, _ ->
-            (activity as PreferencesActivity).updateTheme()
+        themePreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
+            val newTheme = Theme.valueOf(newValue.toString())
+            if (newTheme != Preferences.theme){
+                (activity as PreferencesActivity).updateTheme()
+            }
+
             true
         }
 
@@ -48,16 +46,16 @@ class PreferencesFragment : PreferenceFragmentCompat() {
     private fun updateDayVisibility(newFrequency: Frequency?) {
         when (newFrequency) {
             Frequency.ONCE_A_WEEK -> {
-                day1Preference?.isEnabled = true
-                day2Preference?.isEnabled = false
+                day1Preference?.isVisible = true
+                day2Preference?.isVisible = false
             }
             Frequency.TWICE_A_WEEK -> {
-                day1Preference?.isEnabled = true
-                day2Preference?.isEnabled = true
+                day1Preference?.isVisible = true
+                day2Preference?.isVisible = true
             }
             else -> {
-                day1Preference?.isEnabled = false
-                day2Preference?.isEnabled = false
+                day1Preference?.isVisible = false
+                day2Preference?.isVisible = false
             }
         }
     }

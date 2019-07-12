@@ -4,4 +4,7 @@
     <attr name="themedIconShare" format="reference" />
     <attr name="themedIconSettings" format="reference" />
     <attr name="themedIconNotification" format="reference" />
+
+    <attr name="textColorPrimary" format="reference" />
+    <attr name="backgroundColorPrimary" format="reference" />
 </resources>

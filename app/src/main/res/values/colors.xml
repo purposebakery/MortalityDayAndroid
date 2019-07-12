@@ -5,13 +5,13 @@
     <color name="colorPrimaryDark">#616161</color>
 
     <color name="colorPrimaryInverse">#212121</color>
-    <color name="colorPrimaryDarkInverse">#212121</color>
+    <color name="colorPrimaryDarkInverse">#000000</color>
     <color name="colorAccent">#8bc34a</color>
 
     <color name="grey">#BBBBBB</color>
 
     <color name="background_light">#ECEFF1</color>
-    <color name="background_dark">#263238</color>
+    <color name="background_dark">#303030</color>
 
     <color name="textColorPrimary">#000000</color>
     <color name="textColorDeactivated">#BBBBBB</color>

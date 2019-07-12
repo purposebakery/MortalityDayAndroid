@@ -51,6 +51,7 @@ class MessageActivity : AppCompatActivity() {
 
         message_settings.setOnClickListener {
             val intent = Intent(this@MessageActivity, PreferencesActivity::class.java)
+            intent.putExtra(PreferencesActivity.CALLED_INTERNAL, true)
             startActivity(intent)
         }
 
