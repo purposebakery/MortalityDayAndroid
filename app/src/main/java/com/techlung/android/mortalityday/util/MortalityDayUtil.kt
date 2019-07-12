@@ -18,7 +18,6 @@ object MortalityDayUtil {
      * Get next mortality day. skip current day if today is a mortality day.
      */
     // add one Day
-    // add one Day
     val nextMortalityDay: Calendar
         get() {
             val day = GregorianCalendar()
@@ -69,5 +68,4 @@ object MortalityDayUtil {
         var message: String? = null
         var author: String? = null
     }
-
 }

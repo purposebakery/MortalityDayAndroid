@@ -31,7 +31,7 @@ class PreferencesFragment : PreferenceFragmentCompat() {
 
         themePreference?.onPreferenceChangeListener = Preference.OnPreferenceChangeListener { _, newValue ->
             val newTheme = Theme.valueOf(newValue.toString())
-            if (newTheme != Preferences.theme){
+            if (newTheme != Preferences.theme) {
                 (activity as PreferencesActivity).updateTheme()
             }
 
